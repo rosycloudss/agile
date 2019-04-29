@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.order.mapper.CustomerAddressMapper">
+	<resultMap id="BaseResultMap"
+		type="com.order.entity.CustomerAddress">
+		<!--@mbg.generated -->
+		<id column="address_id" jdbcType="INTEGER" property="addressId" />
+		<result column="customer_id" jdbcType="INTEGER"
+			property="customerId" />
+		<result column="address" jdbcType="VARCHAR" property="address" />
+		<result column="phone" jdbcType="VARCHAR" property="phone" />
+		<result column="recevier_name" jdbcType="VARCHAR"
+			property="recevierName" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		<!--@mbg.generated -->
+		address_id, customer_id, address, phone, recevier_name
+	</sql>
+	<select id="selectByPrimaryKey"
+		parameterType="java.lang.Integer" resultMap="BaseResultMap">
+		<!--@mbg.generated -->
+		select
+		<include refid="Base_Column_List" />
+		from tb_customer_address
+		where address_id = #{addressId,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey"
+		parameterType="java.lang.Integer">
+		<!--@mbg.generated -->
+		delete from tb_customer_address
+		where address_id = #{addressId,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert"
+		parameterType="com.order.entity.CustomerAddress">
+		<!--@mbg.generated -->
+		insert into tb_customer_address (address_id, customer_id, address,
+		phone, recevier_name)
+		values (#{addressId,jdbcType=INTEGER}, #{customerId,jdbcType=INTEGER},
+		#{address,jdbcType=VARCHAR},
+		#{phone,jdbcType=VARCHAR}, #{recevierName,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective"
+		parameterType="com.order.entity.CustomerAddress">
+		<!--@mbg.generated -->
+		insert into tb_customer_address
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="addressId != null">
+				address_id,
+			</if>
+			<if test="customerId != null">
+				customer_id,
+			</if>
+			<if test="address != null">
+				address,
+			</if>
+			<if test="phone != null">
+				phone,
+			</if>
+			<if test="recevierName != null">
+				recevier_name,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="addressId != null">
+				#{addressId,jdbcType=INTEGER},
+			</if>
+			<if test="customerId != null">
+				#{customerId,jdbcType=INTEGER},
+			</if>
+			<if test="address != null">
+				#{address,jdbcType=VARCHAR},
+			</if>
+			<if test="phone != null">
+				#{phone,jdbcType=VARCHAR},
+			</if>
+			<if test="recevierName != null">
+				#{recevierName,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective"
+		parameterType="com.order.entity.CustomerAddress">
+		<!--@mbg.generated -->
+		update tb_customer_address
+		<set>
+			<if test="customerId != null">
+				customer_id = #{customerId,jdbcType=INTEGER},
+			</if>
+			<if test="address != null">
+				address = #{address,jdbcType=VARCHAR},
+			</if>
+			<if test="phone != null">
+				phone = #{phone,jdbcType=VARCHAR},
+			</if>
+			<if test="recevierName != null">
+				recevier_name = #{recevierName,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where address_id = #{addressId,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey"
+		parameterType="com.order.entity.CustomerAddress">
+		<!--@mbg.generated -->
+		update tb_customer_address
+		set customer_id = #{customerId,jdbcType=INTEGER},
+		address = #{address,jdbcType=VARCHAR},
+		phone = #{phone,jdbcType=VARCHAR},
+		recevier_name = #{recevierName,jdbcType=VARCHAR}
+		where address_id = #{addressId,jdbcType=INTEGER}
+	</update>
+</mapper>

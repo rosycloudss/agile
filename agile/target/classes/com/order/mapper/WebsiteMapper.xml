@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.order.mapper.WebsiteMapper">
+	<resultMap id="BaseResultMap" type="com.order.entity.Website">
+		<!--@mbg.generated -->
+		<id column="website_id" jdbcType="INTEGER" property="websiteId" />
+		<result column="web_name" jdbcType="VARCHAR" property="webName" />
+		<result column="logo_path" jdbcType="VARCHAR"
+			property="logoPath" />
+		<result column="title" jdbcType="VARCHAR" property="title" />
+		<result column="description" jdbcType="VARCHAR"
+			property="description" />
+		<result column="web_url" jdbcType="VARCHAR" property="webUrl" />
+		<result column="about_us_img_url" jdbcType="VARCHAR"
+			property="aboutUsImgUrl" />
+		<result column="about_us_content" jdbcType="VARCHAR"
+			property="aboutUsContent" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		<!--@mbg.generated -->
+		website_id, web_name, logo_path, title, description, web_url,
+		about_us_img_url, about_us_content
+	</sql>
+	<select id="selectByPrimaryKey"
+		parameterType="java.lang.Integer" resultMap="BaseResultMap">
+		<!--@mbg.generated -->
+		select
+		<include refid="Base_Column_List" />
+		from tb_website
+		where website_id = #{websiteId,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey"
+		parameterType="java.lang.Integer">
+		<!--@mbg.generated -->
+		delete from tb_website
+		where website_id = #{websiteId,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.order.entity.Website">
+		<!--@mbg.generated -->
+		insert into tb_website (website_id, web_name, logo_path,
+		title, description, web_url,
+		about_us_img_url, about_us_content)
+		values (#{websiteId,jdbcType=INTEGER}, #{webName,jdbcType=VARCHAR},
+		#{logoPath,jdbcType=VARCHAR},
+		#{title,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{webUrl,jdbcType=VARCHAR},
+		#{aboutUsImgUrl,jdbcType=VARCHAR}, #{aboutUsContent,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective"
+		parameterType="com.order.entity.Website">
+		<!--@mbg.generated -->
+		insert into tb_website
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="websiteId != null">
+				website_id,
+			</if>
+			<if test="webName != null">
+				web_name,
+			</if>
+			<if test="logoPath != null">
+				logo_path,
+			</if>
+			<if test="title != null">
+				title,
+			</if>
+			<if test="description != null">
+				description,
+			</if>
+			<if test="webUrl != null">
+				web_url,
+			</if>
+			<if test="aboutUsImgUrl != null">
+				about_us_img_url,
+			</if>
+			<if test="aboutUsContent != null">
+				about_us_content,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="websiteId != null">
+				#{websiteId,jdbcType=INTEGER},
+			</if>
+			<if test="webName != null">
+				#{webName,jdbcType=VARCHAR},
+			</if>
+			<if test="logoPath != null">
+				#{logoPath,jdbcType=VARCHAR},
+			</if>
+			<if test="title != null">
+				#{title,jdbcType=VARCHAR},
+			</if>
+			<if test="description != null">
+				#{description,jdbcType=VARCHAR},
+			</if>
+			<if test="webUrl != null">
+				#{webUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="aboutUsImgUrl != null">
+				#{aboutUsImgUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="aboutUsContent != null">
+				#{aboutUsContent,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective"
+		parameterType="com.order.entity.Website">
+		<!--@mbg.generated -->
+		update tb_website
+		<set>
+			<if test="webName != null">
+				web_name = #{webName,jdbcType=VARCHAR},
+			</if>
+			<if test="logoPath != null">
+				logo_path = #{logoPath,jdbcType=VARCHAR},
+			</if>
+			<if test="title != null">
+				title = #{title,jdbcType=VARCHAR},
+			</if>
+			<if test="description != null">
+				description = #{description,jdbcType=VARCHAR},
+			</if>
+			<if test="webUrl != null">
+				web_url = #{webUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="aboutUsImgUrl != null">
+				about_us_img_url = #{aboutUsImgUrl,jdbcType=VARCHAR},
+			</if>
+			<if test="aboutUsContent != null">
+				about_us_content = #{aboutUsContent,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where website_id = #{websiteId,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey"
+		parameterType="com.order.entity.Website">
+		<!--@mbg.generated -->
+		update tb_website
+		set web_name = #{webName,jdbcType=VARCHAR},
+		logo_path = #{logoPath,jdbcType=VARCHAR},
+		title = #{title,jdbcType=VARCHAR},
+		description = #{description,jdbcType=VARCHAR},
+		web_url = #{webUrl,jdbcType=VARCHAR},
+		about_us_img_url = #{aboutUsImgUrl,jdbcType=VARCHAR},
+		about_us_content = #{aboutUsContent,jdbcType=VARCHAR}
+		where website_id = #{websiteId,jdbcType=INTEGER}
+	</update>
+</mapper>

@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.order.mapper.CustomerMapper">
+	<resultMap id="BaseResultMap"
+		type="com.order.entity.Customer">
+		<!--@mbg.generated -->
+		<id column="customer_id" jdbcType="INTEGER" property="customerId" />
+		<result column="phone" jdbcType="VARCHAR" property="phone" />
+		<result column="pwd" jdbcType="VARCHAR" property="pwd" />
+		<result column="STATUS" jdbcType="INTEGER" property="status" />
+		<result column="create_time" jdbcType="TIMESTAMP"
+			property="createTime" />
+		<association property="headImg" javaType="com.order.entity.Img" column="head_img"
+		select="com.order.mapper.ImgMapper.selectByPrimaryKey"></association>
+	</resultMap>
+	<sql id="Base_Column_List">
+		<!--@mbg.generated -->
+		customer_id, head_img, phone, pwd, `STATUS`, create_time
+	</sql>
+	<select id="selectByPrimaryKey"
+		parameterType="java.lang.Integer" resultMap="BaseResultMap">
+		<!--@mbg.generated -->
+		select
+		<include refid="Base_Column_List" />
+		from tb_customer
+		where customer_id = #{customerId,jdbcType=INTEGER}
+	</select>
+	<select id="selectByPhoneAndPassword" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from tb_customer
+		where phone=#{phone} and pwd=password(#{pwd,jdbcType=VARCHAR})
+	</select>
+	
+	<delete id="deleteByPrimaryKey"
+		parameterType="java.lang.Integer">
+		<!--@mbg.generated -->
+		delete from tb_customer
+		where customer_id = #{customerId,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.order.entity.Customer" useGeneratedKeys="true"
+		keyProperty="customerId" keyColumn="customer_id">
+		<!--@mbg.generated -->
+		insert into tb_customer (head_img, phone,
+		pwd, `STATUS`, create_time
+		)
+		values (#{headImg.imgId,jdbcType=INTEGER},
+		#{phone,jdbcType=VARCHAR},
+		password(#{pwd,jdbcType=VARCHAR}), #{status,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}
+		)
+	</insert>
+	<insert id="insertSelective"
+		parameterType="com.order.entity.Customer" useGeneratedKeys="true"
+		keyProperty="customerId" keyColumn="customer_id">
+		<!--@mbg.generated -->
+		insert into tb_customer
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="headImg != null">
+				head_img,
+			</if>
+			<if test="phone != null">
+				phone,
+			</if>
+			<if test="pwd != null">
+				pwd,
+			</if>
+			<if test="status != null">
+				`STATUS`,
+			</if>
+			<if test="createTime != null">
+				create_time,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="headImg != null">
+				#{headImg.imgId,jdbcType=INTEGER},
+			</if>
+			<if test="phone != null">
+				#{phone,jdbcType=VARCHAR},
+			</if>
+			<if test="pwd != null">
+				password(#{pwd,jdbcType=VARCHAR}),
+			</if>
+			<if test="status != null">
+				#{status,jdbcType=INTEGER},
+			</if>
+			<if test="createTime != null">
+				#{createTime,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective"
+		parameterType="com.order.entity.Customer">
+		<!--@mbg.generated -->
+		update tb_customer
+		<set>
+			<if test="headImg != null">
+				head_img = #{headImg.imgId,jdbcType=INTEGER},
+			</if>
+			<if test="phone != null">
+				phone = #{phone,jdbcType=VARCHAR},
+			</if>
+			<if test="pwd != null">
+				pwd = password(#{pwd,jdbcType=VARCHAR}),
+			</if>
+			<if test="status != null">
+				`STATUS` = #{status,jdbcType=INTEGER},
+			</if>
+			<if test="createTime != null">
+				create_time = #{createTime,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where customer_id = #{customerId,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey"
+		parameterType="com.order.entity.Customer">
+		<!--@mbg.generated -->
+		update tb_customer
+		set head_img = #{headImg.imgId,jdbcType=INTEGER},
+		phone = #{phone,jdbcType=VARCHAR},
+		pwd = password(#{pwd,jdbcType=VARCHAR}),
+		`STATUS` = #{status,jdbcType=INTEGER},
+		create_time = #{createTime,jdbcType=TIMESTAMP}
+		where customer_id = #{customerId,jdbcType=INTEGER}
+	</update>
+	
+	
+</mapper>
