@@ -1,5 +1,5 @@
 Manifest-Version: 1.0
-Built-By: liwei
-Build-Jdk: 1.8.0_192
+Built-By: ￦ﾝﾎ￥ﾇﾯ￥ﾻﾺ
+Build-Jdk: 1.8.0_181
 Created-By: Maven Integration for Eclipse
 
