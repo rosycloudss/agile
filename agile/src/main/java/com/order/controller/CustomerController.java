@@ -42,6 +42,12 @@ public class CustomerController{
 		}
 		
 	}
+	
+	@RequestMapping("logout.action")
+	public String logout(HttpSession session) {
+		session.removeAttribute("customer");
+		return "foreground/login";
+	}
 
 
 	@RequestMapping(value = "register.action", method = RequestMethod.POST)

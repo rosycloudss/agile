@@ -70,7 +70,7 @@
             <form class="registerform" action = "<%=request.getContextPath() %>/foreground/customer/register.action"  method="post">
 				<div class="fm-item">
                     <label for="logonId" class="form-label">账号：</label>
-                    <input type="text" placeholder="输入账号" name="account" maxlength="100" id="account" class="i-text" ajaxurl="demo/valid.jsp"  datatype="s6-18" errormsg="用户名至少6个字符,最多18个字符！"  >
+                    <input type="text" placeholder="输入电话号码" name="account" maxlength="100" id="account" class="i-text" ajaxurl="demo/valid.jsp"  datatype="s6-18" errormsg="用户名至少6个字符,最多18个字符！"  >
                     <div class="ui-form-explain"></div>
                 </div>
                 <div class="fm-item">
