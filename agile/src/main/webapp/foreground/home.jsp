@@ -1,5 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+         pageEncoding="utf-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,12 +14,12 @@
 <!--头部-->
 <div class="head layui-col-xs12">
     <div class="layui-col-xs12">
-        <img src="<%=request.getContextPath() %>/foreground/images/logo.png">
+        <img src="../foreground/images/logo.png">
     </div>
     <div class="layui-col-xs12">
         <ul class="layui-nav nav">
-            <li class="layui-nav-item layui-this"><a href="#">网站首页</a></li>
-            <li class="layui-nav-item"><a href="#">特色美食</a></li>
+            <li class="layui-nav-item layui-this"><a href="<%=request.getContextPath() %>/foreground/home.jsp">网站首页</a></li>
+            <li class="layui-nav-item"><a href="<%=request.getContextPath() %>/foreground/dish/dishDisplay.action">特色美食</a></li>
             <li class="layui-nav-item"><a href="#">个人中心</a></li>
             <li class="layui-nav-item"><a href="#">关于我们</a></li>
         </ul>
@@ -28,8 +29,8 @@
 <div class="layui-col-xs12">
     <div class="layui-carousel" id="ration">
         <div carousel-item>
-            <img src="<%=request.getContextPath() %>/foreground/images/ration1.jpg">
-            <img src="<%=request.getContextPath() %>/foreground/images/ration2.jpg">
+            <img src="../foreground/images/ration1.jpg">
+            <img src="../foreground/images/ration2.jpg">
             <img src="<%=request.getContextPath() %>/foreground/images/ration3.jpg">
         </div>
     </div>
@@ -123,7 +124,6 @@
                 </div>
             </li>
         </ul>
-
     </div>
 
 </div>

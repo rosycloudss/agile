@@ -20,4 +20,7 @@ public interface CustomerMapper {
     int updateByPrimaryKey(Customer record);
     
     Customer selectByPhoneAndPassword(@Param("phone")String phone,@Param("pwd")String pwd);
+    
+    
+    Customer selectByPhone(String phone);
 }

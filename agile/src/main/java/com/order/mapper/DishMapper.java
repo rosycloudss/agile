@@ -4,8 +4,13 @@ import org.springframework.stereotype.Repository;
 
 import com.order.entity.Dish;
 
+import java.util.List;
+
 @Repository
 public interface DishMapper {
+
+    List<Dish> selectAll();
+
     int deleteByPrimaryKey(Integer dishId);
 
     int insert(Dish record);

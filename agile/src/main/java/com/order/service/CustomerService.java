@@ -18,5 +18,10 @@ public interface CustomerService{
     int updateByPrimaryKeySelective(Customer record);
 
     int updateByPrimaryKey(Customer record);
+    
+    
+    boolean register(String phone, String password);
+    
+    
 
 }

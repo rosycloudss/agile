@@ -11,17 +11,18 @@ public class RotationChartServiceImpl implements RotationChartService{
     @Resource
     private RotationChartMapper rotationChartMapper;
 
-    
+
+    @Override
     public int deleteByPrimaryKey(Integer rotionId) {
         return rotationChartMapper.deleteByPrimaryKey(rotionId);
     }
 
-    
+    @Override
     public int insert(RotationChart record) {
         return rotationChartMapper.insert(record);
     }
 
-    
+    @Override
     public int insertSelective(RotationChart record) {
         return rotationChartMapper.insertSelective(record);
     }

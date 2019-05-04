@@ -11,7 +11,7 @@
 		<result column="create_time" jdbcType="TIMESTAMP"
 			property="createTime" />
 		<association property="headImg" javaType="com.order.entity.Img" column="head_img"
-		select="com.order.mapper.ImgMapper.selectByPrimaryKey"></association>
+		select="com.order.mapper.ImgMapper.selectByPrimaryKey"/>
 	</resultMap>
 	<sql id="Base_Column_List">
 		<!--@mbg.generated -->
@@ -25,11 +25,19 @@
 		from tb_customer
 		where customer_id = #{customerId,jdbcType=INTEGER}
 	</select>
+	
 	<select id="selectByPhoneAndPassword" resultMap="BaseResultMap">
 		select
 		<include refid="Base_Column_List" />
 		from tb_customer
 		where phone=#{phone} and pwd=password(#{pwd,jdbcType=VARCHAR})
+	</select>
+	
+	<select id="selectByPhone" parameterType="string" resultMap="BaseResultMap">
+		select 
+		<include refid="Base_Column_List" />
+		from tb_customer
+		where phone=#{phone, jdbcType=VARCHAR}
 	</select>
 	
 	<delete id="deleteByPrimaryKey"

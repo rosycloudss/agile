@@ -1,5 +1,7 @@
 package com.order.service.impl;
 
+import java.util.Date;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
@@ -46,5 +48,23 @@ public class CustomerServiceImpl implements CustomerService{
 		return null;
 	}
     
+	@Override
+	public boolean register(String phone, String password) {
+		System.out.println(password + phone);
+    	if (phone == null || password == null) {
+			return false;
+		}
+    	if (customerMapper.selectByPhone(phone) == null) {
+			Customer customer = new Customer();
+			customer.setCreateTime(new Date());
+			customer.setPhone(phone);
+			customer.setPwd(password);
+			customerMapper.insertSelective(customer);
+			if (customer.getCustomerId() != null) {
+				return true;
+			}
+		}
+		return false;
+	}
 
 }

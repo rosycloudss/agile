@@ -2,18 +2,29 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.order.mapper.DishMapper">
   <resultMap id="BaseResultMap" type="com.order.entity.Dish">
-    <!--@mbg.generated-->
+
     <id column="dish_id" jdbcType="INTEGER" property="dishId" />
     <result column="category_id" jdbcType="INTEGER" property="categoryId" />
     <result column="dish_img" jdbcType="INTEGER" property="dishImg" />
     <result column="NAME" jdbcType="VARCHAR" property="name" />
     <result column="description" jdbcType="VARCHAR" property="description" />
     <result column="left_num" jdbcType="INTEGER" property="leftNum" />
+    <result column="price"  jdbcType="FLOAT" property="price"/>
+    <association property="img" column="dish_img"
+                 select="com.order.mapper.ImgMapper.selectByPrimaryKey"/>
   </resultMap>
+
   <sql id="Base_Column_List">
     <!--@mbg.generated-->
-    dish_id, category_id, dish_img, `NAME`, description, left_num
+    dish_id, category_id, dish_img, `NAME`, description, left_num, price
   </sql>
+
+  <select id="selectAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from tb_dish
+  </select>
+
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     <!--@mbg.generated-->
     select 

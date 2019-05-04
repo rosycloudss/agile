@@ -2,19 +2,22 @@ package com.order.service;
 
 import com.order.entity.Dish;
 
+import java.util.List;
+
 public interface DishService{
 
+    public List<Dish> getAll();
 
-    int deleteByPrimaryKey(Integer dishId);
+    public int deleteByPrimaryKey(Integer dishId);
 
-    int insert(Dish record);
+    public int insert(Dish record);
 
-    int insertSelective(Dish record);
+    public int insertSelective(Dish record);
 
-    Dish selectByPrimaryKey(Integer dishId);
+    public Dish selectByPrimaryKey(Integer dishId);
 
-    int updateByPrimaryKeySelective(Dish record);
+    public int updateByPrimaryKeySelective(Dish record);
 
-    int updateByPrimaryKey(Dish record);
+    public int updateByPrimaryKey(Dish record);
 
 }

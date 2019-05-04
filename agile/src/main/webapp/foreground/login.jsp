@@ -63,7 +63,7 @@
                 </div>
                 <div class="fm-item">
                     <label for="logonId" class="form-label"></label>
-                    <input type="submit" value="" tabindex="4" id="send-btn" class="btn-login">
+                    <input type="submit" value="登录" tabindex="4" id="send-btn" class="btn-login">
                     <div class="ui-form-explain"></div>
                 </div>
             </form>

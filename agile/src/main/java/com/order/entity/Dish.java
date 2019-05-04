@@ -4,35 +4,25 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class Dish {
-    /**
-    * 
-    */
+
     private Integer dishId;
 
-    /**
-    * 
-    */
     private Integer categoryId;
 
-    /**
-    * 
-    */
     private Integer dishImg;
 
-    /**
-    * 
-    */
     private String name;
 
-    /**
-    * 
-    */
+    private Float price;
+
     private String description;
 
     /**
-    * 剩余数量
+            * 剩余数量
     */
     private Integer leftNum;
+
+    private Img img;
 
     public Integer getDishId() {
         return dishId;
@@ -80,5 +70,21 @@ public class Dish {
 
     public void setLeftNum(Integer leftNum) {
         this.leftNum = leftNum;
+    }
+
+    public Float getPrice() {
+        return price;
+    }
+
+    public void setPrice(Float price) {
+        this.price = price;
+    }
+
+    public Img getImg() {
+        return img;
+    }
+
+    public void setImg(Img img) {
+        this.img = img;
     }
 }
