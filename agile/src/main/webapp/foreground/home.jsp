@@ -39,7 +39,7 @@
 				<li class="layui-nav-item layui-this"><a
 					href="<%=request.getContextPath()%>/foreground/home.jsp">网站首页</a></li>
 				<li class="layui-nav-item"><a
-					href="<%=request.getContextPath()%>/foreground/dish/dishDisplay.action">特色美食</a></li>
+					href="<%=request.getContextPath()%>/foreground/dish/dishDisplay.action?categoryId=0">特色美食</a></li>
 				<c:if test="${customer != null }">
 					<li class="layui-nav-item"><a href="#">个人中心</a></li>
 				</c:if>
@@ -162,7 +162,9 @@
 			</ul>
 		</div>
 
+
 	</div>
+	
 
 	<script>
 		layui.use('carousel', function() {

@@ -1,5 +1,7 @@
 package com.order.service;
 
+import java.util.List;
+
 import com.order.entity.DishCategory;
 
 public interface DishCategoryService{
@@ -12,6 +14,8 @@ public interface DishCategoryService{
     int insertSelective(DishCategory record);
 
     DishCategory selectByPrimaryKey(Integer categoryId);
+    
+    List<DishCategory> getAll();
 
     int updateByPrimaryKeySelective(DishCategory record);
 

@@ -87,6 +87,7 @@
                     <label for="logonId" class="form-label"></label>
                     <input type="submit" value="注册" tabindex="4" id="send-btn" class="btn-login">
                     <div class="ui-form-explain"></div>
+                    <a href="<%=request.getContextPath() %>/foreground/login.jsp">已有账号？去登陆</a>
                 </div>
             </form>
         </div>

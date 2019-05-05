@@ -42,4 +42,10 @@ public class DishCategory {
     public void setDescription(String description) {
         this.description = description;
     }
+
+	@Override
+	public String toString() {
+		return "DishCategory [categoryId=" + categoryId + ", name=" + name + ", description=" + description + "]";
+	}
+    
 }

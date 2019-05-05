@@ -3,6 +3,7 @@ package com.order.service.impl;
 import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import com.order.entity.Dish;
+import com.order.entity.Page;
 import com.order.mapper.DishMapper;
 import com.order.service.DishService;
 
@@ -15,8 +16,8 @@ public class DishServiceImpl implements DishService{
     private DishMapper dishMapper;
 
     @Override
-    public List<Dish> getAll() {
-        return dishMapper.selectAll();
+    public List<Dish> getAll(Page page) {
+        return getDishByCategoryId(null,page);
     }
 
     @Override
@@ -38,8 +39,29 @@ public class DishServiceImpl implements DishService{
     public Dish selectByPrimaryKey(Integer dishId) {
         return dishMapper.selectByPrimaryKey(dishId);
     }
+    
 
     @Override
+	public List<Dish> getDishByCategoryId(Integer categoryId,Page page) {
+    	List<Dish> dishList = null;
+    	if(categoryId != null && categoryId != 0) {
+    		dishList = dishMapper.selectByCategoryId(categoryId,page);
+    	}else {
+    		dishList = dishMapper.selectByCategoryId(null,page);
+    	}
+		return dishList;
+	}
+
+	@Override
+	public int countDish(Integer categoryId) {
+		if(categoryId != null && categoryId != 0) {
+			return dishMapper.countDish(categoryId);
+		}else {
+			return dishMapper.countDish(null);
+		}
+	}
+
+	@Override
     public int updateByPrimaryKeySelective(Dish record) {
         return dishMapper.updateByPrimaryKeySelective(record);
     }

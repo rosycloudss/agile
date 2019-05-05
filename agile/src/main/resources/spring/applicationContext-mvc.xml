@@ -70,6 +70,12 @@
 		<property name="defaultEncoding" value="UTF-8" />
 	</bean>
 	<mvc:annotation-driven />
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/**"/>
+			<bean class="com.order.intercepter.DishCategoryIntercepter"></bean>
+		</mvc:interceptor>
+	</mvc:interceptors>
 	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/"></property>

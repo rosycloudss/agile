@@ -1,125 +1,152 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.order.mapper.DishMapper">
-  <resultMap id="BaseResultMap" type="com.order.entity.Dish">
+	<resultMap id="BaseResultMap" type="com.order.entity.Dish">
 
-    <id column="dish_id" jdbcType="INTEGER" property="dishId" />
-    <result column="category_id" jdbcType="INTEGER" property="categoryId" />
-    <result column="dish_img" jdbcType="INTEGER" property="dishImg" />
-    <result column="NAME" jdbcType="VARCHAR" property="name" />
-    <result column="description" jdbcType="VARCHAR" property="description" />
-    <result column="left_num" jdbcType="INTEGER" property="leftNum" />
-    <result column="price"  jdbcType="FLOAT" property="price"/>
-    <association property="img" column="dish_img"
-                 select="com.order.mapper.ImgMapper.selectByPrimaryKey"/>
-  </resultMap>
+		<id column="dish_id" jdbcType="INTEGER" property="dishId" />
+		<result column="category_id" jdbcType="INTEGER"
+			property="categoryId" />
+		<result column="dish_img" jdbcType="INTEGER" property="dishImg" />
+		<result column="NAME" jdbcType="VARCHAR" property="name" />
+		<result column="description" jdbcType="VARCHAR"
+			property="description" />
+		<result column="left_num" jdbcType="INTEGER" property="leftNum" />
+		<result column="price" jdbcType="FLOAT" property="price" />
+		<association property="img" column="dish_img"
+			select="com.order.mapper.ImgMapper.selectByPrimaryKey" />
+	</resultMap>
 
-  <sql id="Base_Column_List">
-    <!--@mbg.generated-->
-    dish_id, category_id, dish_img, `NAME`, description, left_num, price
-  </sql>
+	<sql id="Base_Column_List">
+		<!--@mbg.generated -->
+		dish_id, category_id, dish_img, `NAME`, description, left_num, price
+	</sql>
 
-  <select id="selectAll" resultMap="BaseResultMap">
-    select
-    <include refid="Base_Column_List"/>
-    from tb_dish
-  </select>
+	<select id="selectAll" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from tb_dish
+	</select>
 
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    <!--@mbg.generated-->
-    select 
-    <include refid="Base_Column_List" />
-    from tb_dish
-    where dish_id = #{dishId,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    <!--@mbg.generated-->
-    delete from tb_dish
-    where dish_id = #{dishId,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="com.order.entity.Dish">
-    <!--@mbg.generated-->
-    insert into tb_dish (dish_id, category_id, dish_img, 
-      `NAME`, description, left_num
-      )
-    values (#{dishId,jdbcType=INTEGER}, #{categoryId,jdbcType=INTEGER}, #{dishImg,jdbcType=INTEGER}, 
-      #{name,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{leftNum,jdbcType=INTEGER}
-      )
-  </insert>
-  <insert id="insertSelective" parameterType="com.order.entity.Dish">
-    <!--@mbg.generated-->
-    insert into tb_dish
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="dishId != null">
-        dish_id,
-      </if>
-      <if test="categoryId != null">
-        category_id,
-      </if>
-      <if test="dishImg != null">
-        dish_img,
-      </if>
-      <if test="name != null">
-        `NAME`,
-      </if>
-      <if test="description != null">
-        description,
-      </if>
-      <if test="leftNum != null">
-        left_num,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="dishId != null">
-        #{dishId,jdbcType=INTEGER},
-      </if>
-      <if test="categoryId != null">
-        #{categoryId,jdbcType=INTEGER},
-      </if>
-      <if test="dishImg != null">
-        #{dishImg,jdbcType=INTEGER},
-      </if>
-      <if test="name != null">
-        #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="description != null">
-        #{description,jdbcType=VARCHAR},
-      </if>
-      <if test="leftNum != null">
-        #{leftNum,jdbcType=INTEGER},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.order.entity.Dish">
-    <!--@mbg.generated-->
-    update tb_dish
-    <set>
-      <if test="categoryId != null">
-        category_id = #{categoryId,jdbcType=INTEGER},
-      </if>
-      <if test="dishImg != null">
-        dish_img = #{dishImg,jdbcType=INTEGER},
-      </if>
-      <if test="name != null">
-        `NAME` = #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="description != null">
-        description = #{description,jdbcType=VARCHAR},
-      </if>
-      <if test="leftNum != null">
-        left_num = #{leftNum,jdbcType=INTEGER},
-      </if>
-    </set>
-    where dish_id = #{dishId,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.order.entity.Dish">
-    <!--@mbg.generated-->
-    update tb_dish
-    set category_id = #{categoryId,jdbcType=INTEGER},
-      dish_img = #{dishImg,jdbcType=INTEGER},
-      `NAME` = #{name,jdbcType=VARCHAR},
-      description = #{description,jdbcType=VARCHAR},
-      left_num = #{leftNum,jdbcType=INTEGER}
-    where dish_id = #{dishId,jdbcType=INTEGER}
-  </update>
+	<select id="selectByPrimaryKey"
+		parameterType="java.lang.Integer" resultMap="BaseResultMap">
+		<!--@mbg.generated -->
+		select
+		<include refid="Base_Column_List" />
+		from tb_dish
+		where dish_id = #{dishId,jdbcType=INTEGER}
+	</select>
+	<select id="selectByCategoryId" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from tb_dish
+		<if test="categoryId != null">
+			where category_id = #{categoryId,jdbcType=INTEGER}
+		</if>
+		order by dish_id 
+		<if test="page != null">
+			limit #{page.pageStart,jdbcType=INTEGER},#{page.pageSize,jdbcType=INTEGER}
+		</if>
+		
+	</select>
+	<select id="countDish" resultType="java.lang.Integer">
+		select count(dish_id) from tb_dish
+		<if test="categoryId != null">
+			where category_id = #{categoryId,jdbcType=INTEGER}
+		</if>
+	</select>
+	<delete id="deleteByPrimaryKey"
+		parameterType="java.lang.Integer">
+		<!--@mbg.generated -->
+		delete from tb_dish
+		where dish_id = #{dishId,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.order.entity.Dish">
+		<!--@mbg.generated -->
+		insert into tb_dish (dish_id, category_id, dish_img,
+		`NAME`, description, left_num
+		)
+		values (#{dishId,jdbcType=INTEGER}, #{categoryId,jdbcType=INTEGER},
+		#{dishImg,jdbcType=INTEGER},
+		#{name,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{leftNum,jdbcType=INTEGER}
+		)
+	</insert>
+	<insert id="insertSelective"
+		parameterType="com.order.entity.Dish">
+		<!--@mbg.generated -->
+		insert into tb_dish
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="dishId != null">
+				dish_id,
+			</if>
+			<if test="categoryId != null">
+				category_id,
+			</if>
+			<if test="dishImg != null">
+				dish_img,
+			</if>
+			<if test="name != null">
+				`NAME`,
+			</if>
+			<if test="description != null">
+				description,
+			</if>
+			<if test="leftNum != null">
+				left_num,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="dishId != null">
+				#{dishId,jdbcType=INTEGER},
+			</if>
+			<if test="categoryId != null">
+				#{categoryId,jdbcType=INTEGER},
+			</if>
+			<if test="dishImg != null">
+				#{dishImg,jdbcType=INTEGER},
+			</if>
+			<if test="name != null">
+				#{name,jdbcType=VARCHAR},
+			</if>
+			<if test="description != null">
+				#{description,jdbcType=VARCHAR},
+			</if>
+			<if test="leftNum != null">
+				#{leftNum,jdbcType=INTEGER},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective"
+		parameterType="com.order.entity.Dish">
+		<!--@mbg.generated -->
+		update tb_dish
+		<set>
+			<if test="categoryId != null">
+				category_id = #{categoryId,jdbcType=INTEGER},
+			</if>
+			<if test="dishImg != null">
+				dish_img = #{dishImg,jdbcType=INTEGER},
+			</if>
+			<if test="name != null">
+				`NAME` = #{name,jdbcType=VARCHAR},
+			</if>
+			<if test="description != null">
+				description = #{description,jdbcType=VARCHAR},
+			</if>
+			<if test="leftNum != null">
+				left_num = #{leftNum,jdbcType=INTEGER},
+			</if>
+		</set>
+		where dish_id = #{dishId,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey"
+		parameterType="com.order.entity.Dish">
+		<!--@mbg.generated -->
+		update tb_dish
+		set category_id = #{categoryId,jdbcType=INTEGER},
+		dish_img = #{dishImg,jdbcType=INTEGER},
+		`NAME` = #{name,jdbcType=VARCHAR},
+		description = #{description,jdbcType=VARCHAR},
+		left_num = #{leftNum,jdbcType=INTEGER}
+		where dish_id = #{dishId,jdbcType=INTEGER}
+	</update>
 </mapper>

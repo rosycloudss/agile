@@ -65,7 +65,7 @@
                     <label for="logonId" class="form-label"></label>
                     <input type="submit" value="登录" tabindex="4" id="send-btn" class="btn-login">
                     <div class="ui-form-explain"></div>
-                     <a href="<%=request.getContextPath() %>/foreground/register.jsp">没有账号？请注册</a>
+                     <a href="<%=request.getContextPath() %>/foreground/register.jsp">没有账号？去注册</a>
                 </div>
             </form>
         </div>

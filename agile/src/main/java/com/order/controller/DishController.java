@@ -1,6 +1,10 @@
 package com.order.controller;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,8 +13,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.order.entity.Dish;
+import com.order.entity.Page;
 import com.order.service.DishCategoryService;
 import com.order.service.DishService;
+import com.order.util.WebUtil;
 
 /**
  * @author muwei
@@ -23,7 +29,6 @@ public class DishController {
 	private final DishService dishService;
 
 	private final DishCategoryService dishCategoryService;
-	
 
 	@Autowired
 	public DishController(DishService dishService, DishCategoryService dishCategoryService) {
@@ -33,10 +38,18 @@ public class DishController {
 	}
 
 	@RequestMapping(value = "dishDisplay.action", method = RequestMethod.GET)
-	public String dishDisplay(Model model) {
-        List<Dish> dishList = dishService.getAll();
-        model.addAttribute("dishList", dishList);
+	public String dishDisplay(Integer categoryId,Integer currentPage,Model model,HttpServletRequest request, HttpSession session) {
+		List<Dish> dishList = new ArrayList<>();
+		
+		currentPage = (currentPage == null ? 1 : currentPage);
+		System.out.println("currentPage===" + currentPage);
+		Page page = new Page(dishService.countDish(categoryId),currentPage,9);
+		page.setPath(WebUtil.getPath(request));
+		dishList = dishService.getDishByCategoryId(categoryId, page);
+		model.addAttribute("page",page);
+		model.addAttribute("categoryId", categoryId == null ? 0 : categoryId);
+		model.addAttribute("dishList", dishList);
 		return "/foreground/dishDisplay";
 	}
-	
+
 }

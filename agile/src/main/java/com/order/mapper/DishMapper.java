@@ -1,25 +1,31 @@
 package com.order.mapper;
 
+import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import com.order.entity.Dish;
-
-import java.util.List;
+import com.order.entity.Page;
 
 @Repository
 public interface DishMapper {
 
-    List<Dish> selectAll();
+	List<Dish> selectAll();
 
-    int deleteByPrimaryKey(Integer dishId);
+	int deleteByPrimaryKey(Integer dishId);
 
-    int insert(Dish record);
+	int insert(Dish record);
 
-    int insertSelective(Dish record);
+	int insertSelective(Dish record);
 
-    Dish selectByPrimaryKey(Integer dishId);
+	Dish selectByPrimaryKey(Integer dishId);
 
-    int updateByPrimaryKeySelective(Dish record);
+	List<Dish> selectByCategoryId(@Param("categoryId") Integer categoryId, @Param("page") Page page);
 
-    int updateByPrimaryKey(Dish record);
+	int countDish(@Param("categoryId") Integer categoryId);
+	
+	int updateByPrimaryKeySelective(Dish record);
+
+	int updateByPrimaryKey(Dish record);
 }
