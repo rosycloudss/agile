@@ -72,7 +72,7 @@
 	<mvc:annotation-driven />
 	<mvc:interceptors>
 		<mvc:interceptor>
-			<mvc:mapping path="/**"/>
+			<mvc:mapping path="/foreground/dishDisplay.jsp"/>
 			<bean class="com.order.intercepter.DishCategoryIntercepter"></bean>
 		</mvc:interceptor>
 	</mvc:interceptors>
