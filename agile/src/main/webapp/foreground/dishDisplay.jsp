@@ -50,7 +50,7 @@
 				<c:if test="${customer != null }">
 					<li class="layui-nav-item"><a href="#">个人中心</a></li>
 				</c:if>
-				<li class="layui-nav-item"><a href="#">关于我们</a></li>
+				<li class="layui-nav-item"><a href="<%=request.getContextPath()%>/foreground/about.jsp">关于我们</a></li>
 			</ul>
 		</div>
 		<div class="layui-col-xs12">

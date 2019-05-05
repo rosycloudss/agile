@@ -43,7 +43,7 @@
 				<c:if test="${customer != null }">
 					<li class="layui-nav-item"><a href="#">个人中心</a></li>
 				</c:if>
-				<li class="layui-nav-item"><a href="#">关于我们</a></li>
+				<li class="layui-nav-item"><a href="<%=request.getContextPath()%>/foreground/about.jsp">关于我们</a></li>
 			</ul>
 		</div>
 	</div>
@@ -51,8 +51,8 @@
 	<div class="layui-col-xs12">
 		<div class="layui-carousel" id="ration">
 			<div carousel-item="">
-				<img src="../foreground/images/ration1.jpg"> 
-				<img src="../foreground/images/ration2.jpg"> 
+				<img src="<%=request.getContextPath()%>/foreground/images/ration1.jpg"> 
+				<img src="<%=request.getContextPath()%>/foreground/images/ration2.jpg"> 
 				<img src="<%=request.getContextPath()%>/foreground/images/ration3.jpg">
 			</div>
 		</div>
