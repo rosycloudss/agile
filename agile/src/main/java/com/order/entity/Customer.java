@@ -11,10 +11,20 @@ public class Customer {
 	*/
 	private Integer customerId;
 
+	public Img getHeadImg() {
+		return headImg;
+	}
+
+	public void setHeadImg(Img headImg) {
+		this.headImg = headImg;
+	}
+
 	/**
 	* 
 	*/
 	private Img headImg;
+
+
 
 	/**
 	* 
@@ -42,14 +52,6 @@ public class Customer {
 
 	public void setCustomerId(Integer customerId) {
 		this.customerId = customerId;
-	}
-
-	public Img getHeadImg() {
-		return headImg;
-	}
-
-	public void setHeadImg(Img headImg) {
-		this.headImg = headImg;
 	}
 
 	public String getPhone() {

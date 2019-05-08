@@ -1,6 +1,9 @@
 package com.order.service.impl;
 
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+
 import javax.annotation.Resource;
 import com.order.entity.CustomerAddress;
 import com.order.mapper.CustomerAddressMapper;
@@ -34,5 +37,10 @@ public class CustomerAddressServiceImpl implements CustomerAddressService{
     public int updateByPrimaryKey(CustomerAddress record) {
         return customerAddressMapper.updateByPrimaryKey(record);
     }
+    
+    public List<CustomerAddress> getAddressByCustomerId(Integer customerId){
+    	return customerAddressMapper.getAddressByCustomerId(customerId);
+    }
+
 
 }

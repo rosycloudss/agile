@@ -63,8 +63,7 @@
 	<!--自动扫描映射接口 -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<!-- 指定sql会话工厂，在上面配置过的 -->
-		<property name="sqlSessionFactoryBeanName"
-			value="sqlSessionFactory"></property>
+		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
 		<!-- 指定基础包，即自动扫描com.order.mapper这个包下的所有接口类 -->
 		<property name="basePackage" value="com.order.mapper"></property>
 	</bean>

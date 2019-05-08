@@ -24,6 +24,16 @@
 		from tb_customer_address
 		where address_id = #{addressId,jdbcType=INTEGER}
 	</select>
+	
+	<select id="getAddressByCustomerId"
+		parameterType="java.lang.Integer" resultMap="BaseResultMap">
+		<!--@mbg.generated -->
+		select
+		<include refid="Base_Column_List" />
+		from tb_customer_address
+		where customer_id = #{customerId,jdbcType=INTEGER}
+	</select>
+	
 	<delete id="deleteByPrimaryKey"
 		parameterType="java.lang.Integer">
 		<!--@mbg.generated -->

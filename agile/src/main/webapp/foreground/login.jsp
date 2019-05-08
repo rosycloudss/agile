@@ -52,17 +52,17 @@
             <div class="error-box">${msg != null ? msg : "" } </div>
             <form class="registerform" action = "<%=request.getContextPath() %>/foreground/customer/login.action"  method="post">
 				<div class="fm-item">
-                    <label for="logonId" class="form-label">账号：</label>
+                    <label for="account" class="form-label">账号：</label>
                     <input type="text" placeholder="输入电话号码" name="account" maxlength="100" id="account" class="i-text" ajaxurl="demo/valid.jsp"  datatype="s6-18" errormsg="用户名至少6个字符,最多18个字符！"  >
                     <div class="ui-form-explain"></div>
                 </div>
                 <div class="fm-item">
-                    <label for="logonId" class="form-label">登陆密码：</label>
+                    <label for="password" class="form-label">登陆密码：</label>
                     <input type="password" name="password" placeholder="请输入密码" maxlength="100" id="password" class="i-text" datatype="*6-16" nullmsg="请设置密码！" errormsg="密码范围在6~16位之间！">
                     <div class="ui-form-explain"></div>
                 </div>
                 <div class="fm-item">
-                    <label for="logonId" class="form-label"></label>
+                    <label class="form-label"></label>
                     <input type="submit" value="登录" tabindex="4" id="send-btn" class="btn-login">
                     <div class="ui-form-explain"></div>
                      <a href="<%=request.getContextPath() %>/foreground/register.jsp">没有账号？去注册</a>
