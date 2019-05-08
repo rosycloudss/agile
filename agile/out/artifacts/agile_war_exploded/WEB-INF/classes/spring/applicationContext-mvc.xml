@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+               http://www.springframework.org/schema/beans/spring-beans.xsd
+               http://www.springframework.org/schema/util 
+               http://www.springframework.org/schema/util/spring-util.xsd
+               http://www.springframework.org/schema/aop 
+               http://www.springframework.org/schema/aop/spring-aop.xsd
+               http://www.springframework.org/schema/mvc
+               http://www.springframework.org/schema/mvc/spring-mvc.xsd
+               http://www.springframework.org/schema/context
+               http://www.springframework.org/schema/context/spring-context.xsd ">
+
+	<bean
+		class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+		<property name="messageConverters">
+			<list>
+				<bean
+					class="org.springframework.http.converter.StringHttpMessageConverter">
+					<property name="supportedMediaTypes">
+						<list>
+							<value>text/plain;charset=UTF-8</value>
+							<value>text/html;charset=UTF-8</value>
+							<value>applicaiton/javascript;charset=UTF-8</value>
+							<value>application/json;charset=UTF-8</value>
+						</list>
+					</property>
+				</bean>
+				<bean id="fastJsonHttpMessageConverter"
+					class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter">
+					<!-- 加入支持的媒体类型 -->
+					<property name="supportedMediaTypes">
+						<list>
+							<!-- 这里顺序不能反，一定先写text/html，不然IE执行AJAX时,返回JSON会出现下载文件 -->
+							<value>text/html;charset=UTF-8</value>
+							<value>text/plain;charset=UTF-8</value>
+							<value>text/x-markdown;charset=utf-8</value>
+							<value>application/json;charset=UTF-8</value>
+							<value>application/xml;charset=UTF-8</value>
+						</list>
+					</property>
+					<property name="fastJsonConfig">
+						<bean
+							class="com.alibaba.fastjson.support.config.FastJsonConfig">
+							<property name="features">
+								<list>
+									<value>AllowArbitraryCommas</value>
+									<value>AllowUnQuotedFieldNames</value>
+									<value>DisableCircularReferenceDetect</value>
+								</list>
+							</property>
+							<property name="dateFormat" value="yyyy-MM-dd HH:mm:ss" />
+						</bean>
+					</property>
+				</bean>
+			</list>
+		</property>
+	</bean>
+	<!-- 文件上传配置 -->
+	<bean id="multipartResolver"
+		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize" value="104857600" />
+		<property name="maxInMemorySize" value="4096" />
+		<property name="defaultEncoding" value="UTF-8" />
+	</bean>
+	<mvc:annotation-driven />
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/foreground/dishDisplay.jsp"/>
+			<bean class="com.order.intercepter.DishCategoryIntercepter"></bean>
+		</mvc:interceptor>
+	</mvc:interceptors>
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/"></property>
+		<property name="suffix" value=".jsp"></property>
+	</bean>
+	<!-- 防止拦截js css文件 -->
+	<mvc:default-servlet-handler />
+	
+	<context:component-scan
+		base-package="com.order.controller"></context:component-scan>
+</beans>
