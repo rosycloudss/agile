@@ -1,5 +1,7 @@
 package com.order.mapper;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -15,6 +17,8 @@ public interface CustomerCarMapper {
 
     CustomerCar selectByPrimaryKey(@Param("customerId") Integer customerId, @Param("dishId") Integer dishId);
 
+    List<CustomerCar> selectByCustomerId(Integer customerId);
+    
     int updateByPrimaryKeySelective(CustomerCar record);
 
     int updateByPrimaryKey(CustomerCar record);

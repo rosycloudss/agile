@@ -218,3 +218,9 @@ a:visited {
 a:hover {
 	color: red;
 }
+.car {
+    z-index: 9999;
+    position: fixed ! important;
+    right: 10px;
+    bottom: 10px;
+}

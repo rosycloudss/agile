@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@ page import="java.util.List"%>
-<%@ page import="com.order.entity.Dish"%>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,8 +19,9 @@
 	href="<%=request.getContextPath()%>/foreground/css/basic.css">
 <script type="application/javascript"
 	src="<%=request.getContextPath()%>/layui/layui.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/foreground/js/jquery-3.4.1.js"></script>	
 <script type="application/javascript"
-	src="<%=request.getContextPath()%>/foreground/bootstrap/bootstrap.min.js"></script>
+	src="<%=request.getContextPath()%>/foreground/bootstrap/js/bootstrap.min.js"></script>
 </head>
 <body>
 	<!--头部-->
@@ -38,7 +38,7 @@
 							href="<%=request.getContextPath()%>/foreground/register.jsp">注册</a></label>
 					</c:when>
 					<c:otherwise>
-						<label style="margin-right: 10px"><a href="<%=request.getContextPath()%>/foreground/personalCenter.jsp">个人中心</a></label>
+						<label style="margin-right: 10px"><a href="#">个人中心</a></label>
 						<label style="margin-right: 10px"><a
 							href="<%=request.getContextPath()%>/foreground/customer/logout.action">退出登录</a></label>
 					</c:otherwise>
@@ -52,7 +52,7 @@
 				<li class="layui-nav-item layui-this"><a
 					href="<%=request.getContextPath()%>/foreground/dish/dishDisplay.action?categoryId=0">特色美食</a></li>
 				<c:if test="${customer != null }">
-					<li class="layui-nav-item"><a href="<%=request.getContextPath()%>/foreground/personalCenter.jsp">个人中心</a></li>
+					<li class="layui-nav-item"><a href="#">个人中心</a></li>
 				</c:if>
 				<li class="layui-nav-item"><a
 					href="<%=request.getContextPath()%>/foreground/about.jsp">关于我们</a></li>
@@ -99,7 +99,7 @@
 									<h4>${dish.getPrice() }</h4>
 								</div>
 								<div class="layui-col-md4">
-									<button class="layui-btn layui-btn-lg">
+									<button class="layui-btn layui-btn-lg" onclick="addToCar(${dish.getDishId() })">
 										<h4>加入餐车</h4>
 									</button>
 								</div>
@@ -164,6 +164,11 @@
 					href="${page.getPath()}&currentPage=${requestScope.page.totalPage}">&raquo;</a></li>
 			</ul>
 		</div>
+		<!-- 分页结束 -->
+		
+		  <div id="car_button" class="car" onclick="showCar()">
+                <img src="<%=request.getContextPath()%>/foreground/images/car.png">
+            </div>
 	</div>
 
 
@@ -184,9 +189,55 @@
 				autoplay : true
 			});
 		});
+		function showCar(){
+			var isLogin = "${customer != null ? 1 : 0}"; //判断用户是否登录
+			if(isLogin == 1){
+				alert("<%=request.getContextPath()%>/foreground/getCarList/${customer.getCustomerId() }");
+		        layui.use('layer', function(){
+		            var layer = layui.layer;
+		           
+		            layer.open({
+		                type: 2,
+		                content: ["<%=request.getContextPath()%>/foreground/car/getCarList/${customer.getCustomerId() }"],
+		                area: ['800px', '500px']
+		            });
+	
+		        });
+			}else{
+				alert("你还未登录,请登录！");
+			}
+	    }
+		
+		function addToCar(dishId){
+			var isLogin = "${customer != null ? 1 : 0}"; //判断用户是否登录
+			if(isLogin == 1){
+				$.ajax({
+					  url:"/agile/foreground/car/addDish/${customer.getCustomerId() }/"+dishId,
+					  success:function(data){	
+						var obj = JSON.parse(data)
+						if(obj.result == 1){
+							alert("添加成功");
+						}else{
+							alert("添加失败")
+						}
+					  },
+					  error:function(data){
+						  alert("失败了");
+					  }
+				  })
+			}else{
+				alert("你还未登录,请登录后再进行点菜！");
+			}
+		}
+		
+		function checkLogin(){
+			
+			
+		
+		}
 		
 	</script>
 </body>
 
 </html>
->
+

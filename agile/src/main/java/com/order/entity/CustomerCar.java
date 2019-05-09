@@ -5,17 +5,16 @@ import org.springframework.stereotype.Component;
 @Component
 public class CustomerCar {
     /**
-    * 
+    * 用户ID
     */
     private Integer customerId;
 
     /**
-    * 
+    * 菜品信息
     */
-    private Integer dishId;
-
+    private Dish dish;
     /**
-    * 
+    * 菜品数量
     */
     private Integer dishNum;
 
@@ -27,19 +26,27 @@ public class CustomerCar {
         this.customerId = customerId;
     }
 
-    public Integer getDishId() {
-        return dishId;
-    }
+  
 
-    public void setDishId(Integer dishId) {
-        this.dishId = dishId;
-    }
+    public Dish getDish() {
+		return dish;
+	}
 
-    public Integer getDishNum() {
+	public void setDish(Dish dish) {
+		this.dish = dish;
+	}
+
+	public Integer getDishNum() {
         return dishNum;
     }
 
     public void setDishNum(Integer dishNum) {
         this.dishNum = dishNum;
     }
+
+	@Override
+	public String toString() {
+		return "CustomerCar [customerId=" + customerId + ", dish=" + dish + ", dishNum=" + dishNum + "]";
+	}
+    
 }
