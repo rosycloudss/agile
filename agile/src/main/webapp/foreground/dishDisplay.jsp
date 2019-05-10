@@ -192,14 +192,14 @@
 		function showCar(){
 			var isLogin = "${customer != null ? 1 : 0}"; //判断用户是否登录
 			if(isLogin == 1){
-				alert("<%=request.getContextPath()%>/foreground/getCarList/${customer.getCustomerId() }");
 		        layui.use('layer', function(){
 		            var layer = layui.layer;
 		           
 		            layer.open({
 		                type: 2,
+		                title: '餐车',
 		                content: ["<%=request.getContextPath()%>/foreground/car/getCarList/${customer.getCustomerId() }"],
-		                area: ['800px', '500px']
+		                area: ['1000px', '700px']
 		            });
 	
 		        });

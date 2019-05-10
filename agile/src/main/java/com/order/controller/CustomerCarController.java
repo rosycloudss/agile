@@ -64,7 +64,29 @@ public class CustomerCarController {
 	@RequestMapping("/getCarList/{customerId}")
 	public String getDishCar(@PathVariable("customerId") Integer customerId,Model model) {
 		List<CustomerCar> customerCarList = carService.seletByCustomerId(customerId);
+		float totalPrice = 0;
+		for(CustomerCar car : customerCarList) {
+			totalPrice += (car.getDishNum() * car.getDish().getPrice());
+		}
+		
 		model.addAttribute("carList", customerCarList);
+		model.addAttribute("totalPrice",totalPrice);
 		return "foreground/car";
+	}
+	/**
+	 * 删除购物车信息
+	 * @param customerId
+	 * @param dishId
+	 * @return
+	 */
+	@RequestMapping("/delete/{customerId}/{dishId}")
+	public String deleteDishCar(@PathVariable("customerId") Integer customerId,
+			@PathVariable("dishId") Integer dishId) {
+		if(carService.deleteByPrimaryKey(customerId, dishId) > 0) {
+			System.out.println("删除成功");
+		}else {
+			System.out.println("删除失败");
+		}
+		return "redirect:/foreground/car/getCarList/" + customerId;
 	}
 }
