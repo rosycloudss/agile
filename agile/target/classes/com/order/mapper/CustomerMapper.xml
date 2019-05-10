@@ -65,6 +65,23 @@
 		from tb_customer
 		where phone=#{phone, jdbcType=VARCHAR}
 	</select>
+	
+	<select id="selectByCustomerIdAndPwd" resultMap="BaseResultMap">
+		select 
+		<include refid="Base_Column_List" />
+		from tb_customer
+		where customer_id=#{customerId,jdbcType=INTEGER} and pwd=password(#{pwd,jdbcType=VARCHAR})
+	</select>
+	
+	<update id="updatePassword">
+	    update tb_customer
+	    <set>
+	        <if test="pwd != null">
+				pwd = password(#{pwd,jdbcType=VARCHAR}),
+			</if>
+	    </set>
+	    where customer_id = #{customerId,jdbcType=INTEGER}
+	</update>
 
 	<delete id="deleteByPrimaryKey"
 		parameterType="java.lang.Integer">

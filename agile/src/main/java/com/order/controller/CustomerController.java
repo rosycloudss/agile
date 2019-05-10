@@ -6,6 +6,7 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -130,5 +131,70 @@ public class CustomerController{
 			model.addAttribute("msg","地址查询失败");
 			return "/foreground/personalCenter";
 		}	
+	}
+	/*
+	 * 添加地址
+	 */
+	@RequestMapping(value="insertAddress.action",method=RequestMethod.POST)
+	public String insertAddress(@RequestParam("addressId") int addressId,
+			                    @RequestParam("customerId") int customerId,
+			                    @RequestParam("address") String address,
+			                    @RequestParam("phone") String phone,
+			                    @RequestParam("recevierName") String recevierName) {
+		CustomerAddress customerAddress=new CustomerAddress();
+		customerAddress.setAddress(address);
+		customerAddress.setCustomerId(customerId);
+		customerAddress.setRecevierName(recevierName);
+		customerAddress.setPhone(phone);
+		customerAddress.setAddressId(addressId);
+		customerAddressService.insert(customerAddress);
+		return "foreground/address";
+	}
+	/*
+	 * 获取地址
+	 */
+	@RequestMapping(value="getAddressByCustomerId.action",method=RequestMethod.GET)
+	public String getAddressByCustomerId(HttpSession session,Model model,HttpRequest request) {
+		
+		List<CustomerAddress> addressList=customerAddressService.getAddressByCustomerId
+				              (((Customer)(session.getAttribute("customer"))).getCustomerId());
+		
+		model.addAttribute("addressList",addressList);
+		return "foreground/personalCenter";
+	}
+	/*
+	 * 删除地址
+	 */
+	@RequestMapping(value="delAddressByaddressId.action",method=RequestMethod.GET)
+	public String delAddressByaddressId(@RequestParam("addressId") int addressId,HttpSession session,HttpRequest request,Model model) {
+		customerAddressService.deleteByPrimaryKey(addressId);
+		
+		List<CustomerAddress> addressList=customerAddressService.getAddressByCustomerId
+	              (((Customer)(session.getAttribute("customer"))).getCustomerId());
+
+		model.addAttribute("addressList",addressList);
+		
+		return "foreground/personalCenter";
+	}
+	/*
+	 * 修改密码
+	 */
+	@RequestMapping(value="updatePassword.action",method=RequestMethod.POST)
+	public String updatePassword(@RequestParam("oldPassword") String oldPassword,
+			                    @RequestParam("newPassword") String newPassword,
+			                    @RequestParam("repeatPassword") String repeatPassword,
+			                    Model model,HttpSession session) {
+		int temp=((Customer)(session.getAttribute("customer"))).getCustomerId();
+		Customer customer=customerService.selectByCustomerIdAndPwd(temp, oldPassword);
+		if(customer==null) {
+			model.addAttribute("msg","旧密码错误");
+			return "foreground/password";
+			
+		}else if(!repeatPassword.equals(newPassword)) {
+			model.addAttribute("msg","两次输入密码不一致");
+			return "foreground/password";
+		}
+		customerService.updatePassword(newPassword, temp);
+		return "foreground/password";
 	}
 }

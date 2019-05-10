@@ -47,6 +47,10 @@ public interface CustomerService{
 	    
 	    
 	    boolean register(String phone, String password);
+	    
+	    Customer selectByCustomerIdAndPwd(Integer customerId,String password);
+	    
+	    int updatePassword(String password,Integer customerId);
     
     
 

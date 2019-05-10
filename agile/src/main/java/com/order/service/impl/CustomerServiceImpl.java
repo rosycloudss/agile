@@ -87,5 +87,15 @@ public class CustomerServiceImpl implements CustomerService{
 		}
 		return false;
 	}
+	
+	@Override
+	public Customer selectByCustomerIdAndPwd(Integer customerId,String password) {
+		return customerMapper.selectByCustomerIdAndPwd(customerId, password);
+	}
+	
+	@Override
+	public int updatePassword(String password,Integer customerId) {
+		return customerMapper.updatePassword(password,customerId);
+	}
 
 }
