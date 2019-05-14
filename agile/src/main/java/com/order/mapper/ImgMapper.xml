@@ -26,8 +26,13 @@
 		delete from tb_img
 		where img_id = #{imgId,jdbcType=INTEGER}
 	</delete>
-	<insert id="insert" parameterType="com.order.entity.Img">
+	<insert id="insert" parameterType="com.order.entity.Img" useGeneratedKeys="true" keyProperty="imgId">
 		<!--@mbg.generated -->
+		
+		<selectKey keyProperty="imgId" order="AFTER" resultType="java.lang.Integer">
+            select LAST_INSERT_ID()
+        </selectKey>
+		
 		insert into tb_img (img_id, img_url, description
 		)
 		values (#{imgId,jdbcType=INTEGER}, #{imgUrl,jdbcType=VARCHAR},

@@ -60,7 +60,6 @@ public class CustomerCarController {
 		jsonObject.put("result", result);
 		return jsonObject;
 	}
-
 	@RequestMapping("/getCarList/{customerId}")
 	public String getDishCar(@PathVariable("customerId") Integer customerId,Model model) {
 		List<CustomerCar> customerCarList = carService.seletByCustomerId(customerId);

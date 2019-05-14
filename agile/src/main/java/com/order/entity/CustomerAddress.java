@@ -61,7 +61,7 @@ public class CustomerAddress {
         this.phone = phone;
     }
 
-    public String getRecevierName() {
+    public String getReceiverName() {
         return recevierName;
     }
 

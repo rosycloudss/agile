@@ -38,7 +38,7 @@
 							href="<%=request.getContextPath()%>/foreground/register.jsp">注册</a></label>
 					</c:when>
 					<c:otherwise>
-						<label style="margin-right: 10px"><a href="#">个人中心</a></label>
+						<label style="margin-right: 10px"><a href="<%=request.getContextPath()%>/foreground/customer/getAddressByCustomerId.action">个人中心</a></label>
 						<label style="margin-right: 10px"><a
 							href="<%=request.getContextPath()%>/foreground/customer/logout.action">退出登录</a></label>
 					</c:otherwise>
@@ -52,7 +52,7 @@
 				<li class="layui-nav-item layui-this"><a
 					href="<%=request.getContextPath()%>/foreground/dish/dishDisplay.action?categoryId=0">特色美食</a></li>
 				<c:if test="${customer != null }">
-					<li class="layui-nav-item"><a href="#">个人中心</a></li>
+					<li class="layui-nav-item"><a href="<%=request.getContextPath()%>/foreground/customer/getAddressByCustomerId.action">个人中心</a></li>
 				</c:if>
 				<li class="layui-nav-item"><a
 					href="<%=request.getContextPath()%>/foreground/about.jsp">关于我们</a></li>

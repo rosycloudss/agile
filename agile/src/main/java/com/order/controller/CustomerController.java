@@ -1,23 +1,24 @@
 package com.order.controller;
-
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
+
+import com.alibaba.fastjson.JSONObject;
+import com.aliyuncs.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.order.entity.Customer;
-import com.order.entity.CustomerAddress;
+import com.order.entity.*;
 import com.order.service.CustomerAddressService;
 import com.order.service.CustomerService;
+import com.order.service.ImgService;
 
 /**
  * 
@@ -31,11 +32,12 @@ public class CustomerController{
 
 	private final CustomerService customerService;
 	private final CustomerAddressService customerAddressService;
-	
+	private final ImgService imgService;
 	@Autowired
-	public CustomerController(CustomerService customerService,CustomerAddressService customerAddressService) {
+	public CustomerController(CustomerService customerService,CustomerAddressService customerAddressService,ImgService imgService) {
 		this.customerService = customerService;
 		this.customerAddressService=customerAddressService;
+		this.imgService=imgService;
 	}
 
 	/**
@@ -48,7 +50,7 @@ public class CustomerController{
 	 */
 	@RequestMapping(value = "/login.action", method = RequestMethod.POST)
 	public String login(String account,String password,HttpSession session,Model model) {
-//		System.out.println(account + "====" + password);
+		System.out.println(account + "====" + password);
 		Customer customer = customerService.login(account, password);
 		if(customer != null) {
 			session.setAttribute("customer", customer);
@@ -99,67 +101,37 @@ public class CustomerController{
 		}
 		return customerList.size();
 	}
-	
-	@RequestMapping(value="insertAddress.action",method=RequestMethod.POST)
-	public String insertAddress(@RequestParam("addressId") int addressId,
-			                    @RequestParam("customerId") int customerId,
-			                    @RequestParam("address") String address,
-			                    @RequestParam("phone") String phone,
-			                    @RequestParam("recevierName") String recevierName,Model model) {
-		CustomerAddress customerAddress=new CustomerAddress();
-		customerAddress.setAddress(address);
-		customerAddress.setCustomerId(customerId);
-		customerAddress.setRecevierName(recevierName);
-		customerAddress.setAddressId(addressId);
-		int success=customerAddressService.insert(customerAddress);
-		if(success==1) {
-			model.addAttribute("msg","添加成功");
-			return "redirect:/foreground/address.jsp";
-		}else {
-			model.addAttribute("msg","添加失败");
-			return "/foreground/address";
-		}	
-	}
-	
-	@RequestMapping(value="getAddressByCistomerId.action",method=RequestMethod.POST)
-	public String getAddressByCustomerId(@RequestParam("customerId") int customerId,Model model) {
-		List<CustomerAddress> addressList=customerAddressService.getAddressByCustomerId(customerId);
-		model.addAttribute("list",addressList);
-		if(addressList.size()!=0) {
-			return "redirect:/foreground/personalCenter.jsp";
-		}else {
-			model.addAttribute("msg","地址查询失败");
-			return "/foreground/personalCenter";
-		}	
-	}
 	/*
 	 * 添加地址
 	 */
-	@RequestMapping(value="insertAddress.action",method=RequestMethod.POST)
-	public String insertAddress(@RequestParam("addressId") int addressId,
-			                    @RequestParam("customerId") int customerId,
-			                    @RequestParam("address") String address,
-			                    @RequestParam("phone") String phone,
-			                    @RequestParam("recevierName") String recevierName) {
+	@ResponseBody
+	@RequestMapping("/insertAddress/{customerId}/{address}/{phone}/{recevierName}")
+	public JSONObject insertAddress(@PathVariable("customerId") Integer customerId,
+			                        @PathVariable("address") String address,
+			                        @PathVariable("phone") String phone,
+			                        @PathVariable("recevierName") String recevierName) {
+		JSONObject jsonObject=new JSONObject();
 		CustomerAddress customerAddress=new CustomerAddress();
+		customerAddress.setPhone(phone);
 		customerAddress.setAddress(address);
 		customerAddress.setCustomerId(customerId);
 		customerAddress.setRecevierName(recevierName);
-		customerAddress.setPhone(phone);
-		customerAddress.setAddressId(addressId);
-		customerAddressService.insert(customerAddress);
-		return "foreground/address";
+	    int result=customerAddressService.insert(customerAddress);
+	    jsonObject.put("result", result);
+	    return jsonObject;
 	}
+	
 	/*
 	 * 获取地址
 	 */
 	@RequestMapping(value="getAddressByCustomerId.action",method=RequestMethod.GET)
 	public String getAddressByCustomerId(HttpSession session,Model model,HttpRequest request) {
-		
 		List<CustomerAddress> addressList=customerAddressService.getAddressByCustomerId
 				              (((Customer)(session.getAttribute("customer"))).getCustomerId());
-		
+		Customer customer=customerService.selectByPrimaryKey(((Customer)(session.getAttribute("customer"))).getCustomerId());
 		model.addAttribute("addressList",addressList);
+		model.addAttribute("customer",customer);
+		
 		return "foreground/personalCenter";
 	}
 	/*
@@ -179,22 +151,31 @@ public class CustomerController{
 	/*
 	 * 修改密码
 	 */
-	@RequestMapping(value="updatePassword.action",method=RequestMethod.POST)
-	public String updatePassword(@RequestParam("oldPassword") String oldPassword,
-			                    @RequestParam("newPassword") String newPassword,
-			                    @RequestParam("repeatPassword") String repeatPassword,
-			                    Model model,HttpSession session) {
+	@ResponseBody
+	@RequestMapping("/updatePassword/{oldPassword}/{newPassword}/{repeatPassword}")
+	public JSONObject updatePassword(@PathVariable("oldPassword") String oldPassword,
+			@PathVariable("newPassword") String newPassword,
+			@PathVariable("repeatPassword") String repeatPassword,HttpSession session) {
+		JSONObject jsonObject=new JSONObject();
 		int temp=((Customer)(session.getAttribute("customer"))).getCustomerId();
 		Customer customer=customerService.selectByCustomerIdAndPwd(temp, oldPassword);
 		if(customer==null) {
-			model.addAttribute("msg","旧密码错误");
-			return "foreground/password";
-			
-		}else if(!repeatPassword.equals(newPassword)) {
-			model.addAttribute("msg","两次输入密码不一致");
-			return "foreground/password";
+			jsonObject.put("msg1","旧密码错误");
+		}else if(!newPassword.equals(repeatPassword)) {
+			jsonObject.put("msg2","两次输入密码不一致");
+		}else{
+			int result=customerService.updatePassword(newPassword, temp);
+		    jsonObject.put("result", result);
 		}
-		customerService.updatePassword(newPassword, temp);
-		return "foreground/password";
+		return jsonObject;
+	}
+	@ResponseBody
+	@RequestMapping("/updatePhone/{customerId}/{phone}")
+	public JSONObject updatePhone(@PathVariable("customerId") Integer customerId,
+			                      @PathVariable("phone") String phone) {
+		JSONObject jsonObject = new JSONObject();
+		int result=customerService.updatePhone(phone,customerId);
+		jsonObject.put("result", result);
+		return jsonObject;
 	}
 }

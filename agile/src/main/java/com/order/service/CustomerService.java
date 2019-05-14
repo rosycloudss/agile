@@ -51,6 +51,8 @@ public interface CustomerService{
 	    Customer selectByCustomerIdAndPwd(Integer customerId,String password);
 	    
 	    int updatePassword(String password,Integer customerId);
+	    
+	    int updatePhone(String phone,Integer customerId);
     
     
 

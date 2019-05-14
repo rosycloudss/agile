@@ -23,7 +23,7 @@
 		body{ text-align:center} 
 		.div1{ margin-left:600px; width:400px; height:100px; border:1px } 
 		.div2{ margin-left:700px; width:800px; height:100px; border:1px }
-		.div3{ margin-left:200px; width:400px; height:100px; border:1px}
+		.div3{ margin-left:200px; width:200px; height:100px; border:1px}
 	</style> 
 	<script type="text/javascript">
 	$(function() {
@@ -33,7 +33,7 @@
 			      layer.open({
 			        type: 2 
 			        ,title: '添加地址'
-			        ,area: ['400px', '400px']
+			        ,area: ['400px', '350px']
 			        ,shade: 0
 			        ,maxmin: true
 			        ,content: '/agile/foreground/address.jsp'
@@ -57,7 +57,7 @@
 				      layer.open({
 				        type: 2 
 				        ,title: '修改密码'
-				        ,area: ['340px', '260px']
+				        ,area: ['340px', '300px']
 				        ,shade: 0
 				        ,maxmin: true
 				        ,content: '/agile/foreground/password.jsp'
@@ -78,7 +78,45 @@
 			 $("#phone").attr("readonly",false);
 			 $("#status").attr("readonly",false);
 		 });
+		 $("#modify").click(function(){
+			 $.ajax({
+		  		  url:"/agile/foreground/customer/updatePhone/"+$("#customerId").val()+"/"+$("#phone").val(),
+		  		  success:function(data){	
+		  			var obj = JSON.parse(data);
+		  			if(obj.result == 1){
+		  				$("#phone").attr("value",$("#phone").val());
+		  				layer.msg('修改成功',{time:1000});
+		  			}
+		  		  },
+		  		  error:function(data){
+		  			 layer.msg('修改失败',{time:1000});
+		  		  }
+		     });
+		 });
 	});
+	function Turn(orderId){
+		 var that = this; 
+	      
+	      layer.open({
+	        type: 2 
+	        ,title: '添加地址'
+	        ,area: ['400px', '350px']
+	        ,shade: 0
+	        ,maxmin: true
+	        ,content: '/agile/foreground/orderList.jsp?'+orderId
+	        ,yes: function(){
+	          $(that).click(); 
+	        }
+	        ,btn2: function(){
+	          layer.closeAll();
+	        }
+	        
+	        ,zIndex: layer.zIndex 
+	        ,success: function(layero){
+	          layer.setTop(layero); 
+	        }
+	      });
+	}
 	</script>
 </head>
 <body>
@@ -95,7 +133,8 @@
 							href="<%=request.getContextPath()%>/foreground/register.jsp">注册</a></label>
 					</c:when>
 					<c:otherwise>
-						<label style="margin-right: 10px"><a href="<%=request.getContextPath()%>/foreground/customer/getAddressByCustomerId.action">个人中心</a></label>
+<!-- 						<label style="margin-right: 10px"><a -->
+<%-- 						    href="<%=request.getContextPath()%>/foreground/customer/getAddressByCustomerId.action">个人中心</a></label> --%>
 						<label style="margin-right: 10px"><a
 							href="<%=request.getContextPath()%>/foreground/customer/logout.action">退出登录</a></label>
 						<button class="layui-btn" type="button" name="modifyPassword" id="modifyPassword"
@@ -119,48 +158,44 @@
 			<br><br>
 		</div>
 	</div>
-	 
-    <form class="layui-form" method="post" action="<%=request.getContextPath() %>/foreground/customer/updateCustomer.action">
+	
 	<div class="div3" id="o-box-down"  style="table-layout:fixed;">
-	    <div class="layui-form-item layui-form-text"><label><font color="#ffA500" size="5" >个人信息</font></label></div>
-		<div class="layui-form-item layui-form-text">
-	        <label for="customerId" class="form-label"><font color="#ffA500" size="5" >客户编号：</font></label>
-	        <input type="text" name="customerId" maxlength="100" id="customerId" class="i-text" readonly="true" style="height:25px;font-size:20px"
-	              value="<%=((Customer)(request.getSession().getAttribute("customer"))).getCustomerId()%>">
-	        
+	    <form class="layui-form" method="post" action="<%=request.getContextPath() %>/foreground/customer/updatePhone.action" style="text-align: left">
+		<div>
+		    <div class="layui-form-item layui-form-text" style="text-align:center"><label ><font color="#ffA500" size="5" >个人信息</font></label></div>
+			<div class="layui-form-item layui-form-text">
+		        <label for="customerId" class="form-label" ><font color="#ffA500" size="4" >客户编号</font></label>
+		        <input class="layui-input" type="text" name="customerId" maxlength="100" id="customerId" class="i-text" readonly="true" style="height:25px;font-size:20px;width:230px;height:35px"
+		              value="${customer.getCustomerId()}">
+		    </div>
+		    
+		    <div class="layui-form-item layui-form-text">
+		        <label for="phone" class="form-label"><font color="#ffA500" size="4" >电话号码</font></label>
+		        <input class="layui-input" type="text" name="phone" maxlength="100" id="phone" class="i-text" readonly="true" style="height:25px;font-size:20px;width:230px;height:35px"
+		              value="${customer.getPhone()}">
+		    </div>
+		    
+		    <div>
+		        <button type="button" id="edit" class="layui-btn" style="background-color:black"><font color="#ffA500" size="4" >编辑</font></button>
+		        <button type="button" id="modify" class="layui-btn" style="background-color:black"><font color="#ffA500" size="4" >修改</font></button>
+		    </div>
 	    </div>
-	    <div class="layui-form-item layui-form-text">
-	        <label for="phone" class="form-label"><font color="#ffA500" size="5" >电话号码：</font></label>
-	        <input type="text" name="phone" maxlength="100" id="phone" class="i-text" readonly="true" style="height:25px;font-size:20px"
-	              value="<%=((Customer)(request.getSession().getAttribute("customer"))).getPhone()%>">
-	     
-	    </div>
-
-<!-- 	    <div class="layui-form-item layui-form-text"> -->
-<!-- 	        <label for="status" class="form-label"><font color="#ffA500" size="5" >订单状态：</font></label> -->
-<!-- 	        <input type="text" name="status" maxlength="100" id="status" class="i-text" readonly="true" style="height:25px;font-size:20px" -->
-<%-- 	            value="<%=((Customer)(request.getSession().getAttribute("customer"))).getStatus()%>"> --%>
-	        
-<!-- 	    </div> -->
-<!-- 	    <div> -->
-<!-- 	        <button type="button" id="edit" class="layui-btn" style="background-color:black"><font color="#ffA500" size="4" >编辑</font></button> -->
-<!-- 	        <button type="submit" id="modify" class="layui-btn" style="background-color:black"><font color="#ffA500" size="4" >修改</font></button> -->
-<!-- 	    </div> -->
+	    </form>
     </div>
-    </form>
+    
     
     <div class="div2">
 		<input class="layui-btn" type="submit" name="showAddress" id="showAddress" 
 		style="font-size:20px;background-color:black;color:#ffA500;outline: none" value="收货地址">	
 		<div style=" text-align: center">
-		    <table class="layui-table" style=" text-align: center">
+		    <table class="layui-table" style=" text-align: center" id="table">
 		    <tr>
 		        <th style=" text-align: center"><font color="#ffA500" size="3" >地址编号</font></th>
 		        <th style=" text-align: center"><font color="#ffA500" size="3" >客户编号</font></th>
 		        <th style=" text-align: center"><font color="#ffA500" size="3" >地址</font></th>
 		        <th style=" text-align: center"><font color="#ffA500" size="3" >电话号码</font></th>
 		        <th style=" text-align: center"><font color="#ffA500" size="3" >收件人姓名</font></th>
-		        <th style=" text-align: center"></th>
+		        <th style=" text-align: center"><font color="#ffA500" size="3" >删除</font></th>
 		    </tr>
 			<c:forEach items="${addressList}" var="address">
 					    <tr>
@@ -169,42 +204,59 @@
 					        <td style=" text-align: center"><font color="#ffA500" size="3" >${address.getAddress()}</font></td>
 					        <td style=" text-align: center"><font color="#ffA500" size="3" >${address.getPhone()}</font></td>
 					        <td style=" text-align: center"><font color="#ffA500" size="3" >${address.getReceiverName()}</font></td>
-					        <td style=" text-align: center"><a href="#" onclick="window.confirm('是否删除？')?this.href=
-					               '<%=request.getContextPath()%>/foreground/customer/delAddressByaddressId.action?addressId=${address.getAddressId()}'
-					               :this.href='javascript:void()';"><i class="layui-icon layui-icon-delete"></i></a></td>  
+					        <td style=" text-align: center">
+					           <a href="#" onclick="window.confirm('是否删除？')?
+					                this.href='<%=request.getContextPath()%>/foreground/customer/delAddressByaddressId.action?addressId=${address.getAddressId()}'
+					               :this.href='javascript:void()';">
+					               <i class="layui-icon layui-icon-delete"></i>
+					           </a>
+					        </td>  
 					    </tr>
 		     </c:forEach>
 		     </table>
 	     </div>
-	     <div class="layui-form-item layui-form-text" style="margon-left:350px">
-	        <button class="layui-btn" type="button" name="addAddress" id="addAddress" style="
-	        font-size:20px;background-color:black;color:#ffA500;outline: none">添加收货地址</button> 
+         <!-- 	    历史订单 -->
+	    <input class="layui-btn" type="submit" name="showAddress" id="showAddress" 
+		style="font-size:20px;background-color:black;color:#ffA500;outline: none" value="历史订单">	
+		 <div class="layui-form-item layui-form-text" style="margon-left:350px">
+	        <div style=" text-align: center">
+		    <table class="layui-table" style=" text-align: center" id="table">
+		    <tr>
+		        <th style=" text-align: center"><font color="#ffA500" size="3" >订单编号</font></th>
+		        <th style=" text-align: center"><font color="#ffA500" size="3" >总价格</font></th>
+		        <th style=" text-align: center"><font color="#ffA500" size="3" >状态</font></th>
+		        <th style=" text-align: center"><font color="#ffA500" size="3" >创建时间</font></th>
+		        <th style=" text-align: center"><font color="#ffA500" size="3" >地址编号</font></th>
+		        <th style=" text-align: center"><font color="#ffA500" size="3" >客户编号</font></th>
+		        <th style=" text-align: center"><font color="#ffA500" size="3" >详情</font></th>
+		        <th style=" text-align: center"><font color="#ffA500" size="3" >删除</font></th>
+		    </tr>
+			<c:forEach items="${orderList}" var="order">
+					    <tr>
+					        <td style=" text-align: center"><font color="#ffA500" size="3" >${order.getOrderId()}</font></td>
+					        <td style=" text-align: center"><font color="#ffA500" size="3" >${order.getAmountOfMoney()}</font></td>
+					        <td style=" text-align: center"><font color="#ffA500" size="3" >${order.getStatus()}</font></td>
+					        <td style=" text-align: center"><font color="#ffA500" size="3" >${order.getCreateTime()}</font></td>
+					        <td style=" text-align: center"><font color="#ffA500" size="3" >${order.getCustomerId()}</font></td>
+					        <td style=" text-align: center"><font color="#ffA500" size="3" >${order.getCustomerAddressId()}</font></td>  
+					        <td style=" text-align: center">
+					           <a href="#" onclick="Turn(${order.getOrderId()})">
+					               <i class="layui-icon layui-icon-menu-fill"></i>
+					           </a>
+					        </td>  
+					        <td style=" text-align: center">
+					           <a href="#" onclick="window.confirm('是否删除？')?
+					                this.href='<%=request.getContextPath()%>/foreground/dish/delAddressByaddressId.action?orderId=${order.getOrderId()}'
+					               :this.href='javascript:void()';">
+					               <i class="layui-icon layui-icon-delete"></i>
+					           </a>
+					        </td>  
+					   </tr>
+		     </c:forEach>
+		     </table>
+	     </div>
+		
 	    </div>
 	</div>
-    
-	    
-<!-- 	    <div class="layui-input-inline uploadHeadImage"> -->
-<!-- 	        <label id="headImg" ><font color="#ffA500" size="5" >个人头像</font></label> -->
-<!-- 	        <div class="layui-upload-drag" style="margin-top:20px" id="headImg"> -->
-<!-- 	            <i class="layui-icon"></i> -->
-<!-- 	            <p>点击上传图片，或将图片拖拽到此处</p> -->
-<!-- 	        </div> -->
-<!-- 	    </div> -->
-<!-- 		<div class="layui-input-inline"> -->
-<!-- 		    <div class="layui-upload-list"> -->
-<!-- 		         <img class="layui-upload-img headImage" src="" id="headImg1"> -->
-<!-- 		         <p id="demoText"></p> -->
-<!-- 		    </div> -->
-<!-- 		</div> -->
-<!--     </div> -->
-            
-<%-- 		<%}else if(((Customer)(session.getAttribute("customer"))).getHeadImg()!=null){%> --%>
-<!-- 		    <div class="layui-upload"> -->
-<!-- 			   <label class="layui-btn" id="headImg" style="background-color:black"><font color="#ffA500" size="5" >个人头像</font></label> -->
-<!-- 	        </div>    -->
-<!-- 			<div> -->
-<!-- 				<img alt="" src="" id="headImg" width="180px" height="200px" style="margin-top:20px"> -->
-<!-- 			</div> -->
-<%-- 		<%} %> --%>
 </body>
 </html>

@@ -97,5 +97,9 @@ public class CustomerServiceImpl implements CustomerService{
 	public int updatePassword(String password,Integer customerId) {
 		return customerMapper.updatePassword(password,customerId);
 	}
-
+    
+	@Override
+	public int updatePhone(String phone,Integer customerId) {
+		return customerMapper.updatePhone(phone,customerId);
+	}
 }

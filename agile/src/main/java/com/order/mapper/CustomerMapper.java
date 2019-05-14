@@ -30,4 +30,6 @@ public interface CustomerMapper {
     int updatePassword(@Param("pwd")String pwd,@Param("customerId")Integer customerId);
     
     Customer selectByCustomerIdAndPwd(@Param("customerId")Integer customerId,@Param("pwd")String pwd);
+    
+    int updatePhone(@Param("phone") String phone,@Param("customerId")Integer customerId);
 }

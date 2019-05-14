@@ -29,19 +29,11 @@
 </head>
 <body>
 <script>
-   </script>
+
+</script>
         
         <div class="x-body">
-             <form class="layui-form" method="post" action="<%=request.getContextPath() %>/foreground/customer/insertAddress.action">
-                  <div class="layui-form-item">
-                      <label for="addressId" class="layui-form-label">
-                          <span class="x-red">*</span><font color="#ffA500" size="4" >地址编号</font>
-                      </label>
-                      <div class="layui-input-inline">
-                          <input type="text" id="addressId" name="addressId" required="" lay-verify="addressId"
-                          autocomplete="off" class="layui-input">
-                      </div>
-                  </div>
+             <form class="layui-form">          
                   <div class="layui-form-item">
                       <label for="customerId" class="layui-form-label">
                           <span class="x-red">*</span><font color="#ffA500" size="4" >客户编号</font>
@@ -80,23 +72,40 @@
                  </div>
                  <div class="layui-form-item">
                      <label class="layui-form-label"></label>
-                     <button id="add" type="submit" class="layui-btn" lay-filter="add" lay-submit="">增加</button>
+                     <button id="add" type="button" class="layui-btn" lay-filter="add" lay-submit="">增加</button>
                  </div>
           </form>
         </div>
         <script>
+        $(function(){
+        	$("#add").click(function(){
+        		var customerId=$("#customerId").val();
+        		var address=$("#address").val();
+        		var phone=$("#phone").val();
+        		var receiverName=$("#recevierName").val();
+        		 $.ajax({
+        	  		  url:"/agile/foreground/customer/insertAddress/"+customerId+"/"+address+"/"+phone+"/"+receiverName,  
+        	  		  success:function(data){	
+        	  			var obj = JSON.parse(data);
+        	  			if(obj.result==1){
+        	  				layer.msg('添加成功',{time:1000});
+        	  				window.parent.location.reload();
+        	  				window.parent.layer.closeAll();
+        	  			}
+        	  		  },
+        	  		  error:function(data){
+        	  			layer.msg('添加失败',{time:1000});
+        	  		  }
+        	     });
+        	 });
+        });
             layui.use(['form','layer'], function(){
                 $ = layui.jquery;
                 var form = layui.form,layer = layui.layer;
 
                 //自定义验证规则
                 form.verify({
-                	addressId: function(value){
-                        if(value === '' || value === null){
-                            return '地址编号不能为空';
-                        }
-                    }
-                    ,customerId: function(value){
+                	customerId: function(value){
                         if(value === '' || value === null){
                             return '客户编号不能为空';
                         }
