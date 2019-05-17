@@ -1,5 +1,7 @@
 package com.order.mapper;
 
+import java.util.List;
+
 import org.springframework.stereotype.Repository;
 
 import com.order.entity.Order;
@@ -17,4 +19,6 @@ public interface OrderMapper {
     int updateByPrimaryKeySelective(Order record);
 
     int updateByPrimaryKey(Order record);
+    
+    List<Order> selectByCustomerId(Integer customerId);
 }

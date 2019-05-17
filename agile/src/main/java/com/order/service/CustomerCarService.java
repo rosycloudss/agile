@@ -39,6 +39,16 @@ public interface CustomerCarService {
 	 */
 	int updateDishNum(Integer customerId, Integer dishId, boolean isAdd);
 	
+	/**
+	 *  结算支付
+	 * @param customerId
+	 * @param addressId
+	 * @return
+	 */
+	int pay(Integer customerId, Integer addressId);
+	
 	List<CustomerCar> seletByCustomerId(Integer customerId);
+
+
 
 }

@@ -1,6 +1,9 @@
 package com.order.service.impl;
 
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+
 import javax.annotation.Resource;
 import com.order.mapper.OrderDishMapper;
 import com.order.entity.OrderDish;
@@ -39,6 +42,10 @@ public class OrderDishServiceImpl implements OrderDishService{
     
     public int updateByPrimaryKey(OrderDish record) {
         return orderDishMapper.updateByPrimaryKey(record);
+    }
+    
+    public List<OrderDish> selectByOrderId(String orderId){
+    	return orderDishMapper.selectByOrderId(orderId);
     }
 
 }

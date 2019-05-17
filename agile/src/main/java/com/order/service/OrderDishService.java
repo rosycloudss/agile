@@ -1,5 +1,7 @@
 package com.order.service;
 
+import java.util.List;
+
 import com.order.entity.OrderDish;
 public interface OrderDishService{
 
@@ -15,5 +17,7 @@ public interface OrderDishService{
     int updateByPrimaryKeySelective(OrderDish record);
 
     int updateByPrimaryKey(OrderDish record);
+    
+    List<OrderDish> selectByOrderId(String orderId);
 
 }

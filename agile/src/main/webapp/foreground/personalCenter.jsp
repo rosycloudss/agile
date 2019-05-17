@@ -22,8 +22,8 @@
 	<style> 
 		body{ text-align:center} 
 		.div1{ margin-left:600px; width:400px; height:100px; border:1px } 
-		.div2{ margin-left:700px; width:800px; height:100px; border:1px }
-		.div3{ margin-left:200px; width:200px; height:100px; border:1px}
+		.div2{ margin-left:500px; width:800px; height:100px; border:1px }
+		.div3{ margin-left:150px; width:200px; height:100px; border:1px}
 	</style> 
 	<script type="text/javascript">
 	$(function() {
@@ -99,18 +99,17 @@
 	      
 	      layer.open({
 	        type: 2 
-	        ,title: '添加地址'
-	        ,area: ['400px', '350px']
+	        ,title: '订单详情'
+	        ,area: ['600px', '600px']
 	        ,shade: 0
 	        ,maxmin: true
-	        ,content: '/agile/foreground/orderList.jsp?'+orderId
+	        ,content: '/agile/foreground/orderList.jsp?orderId='+orderId
 	        ,yes: function(){
 	          $(that).click(); 
 	        }
 	        ,btn2: function(){
 	          layer.closeAll();
 	        }
-	        
 	        ,zIndex: layer.zIndex 
 	        ,success: function(layero){
 	          layer.setTop(layero); 
@@ -203,7 +202,7 @@
 					        <td style=" text-align: center"><font color="#ffA500" size="3" >${address.getCustomerId()}</font></td>
 					        <td style=" text-align: center"><font color="#ffA500" size="3" >${address.getAddress()}</font></td>
 					        <td style=" text-align: center"><font color="#ffA500" size="3" >${address.getPhone()}</font></td>
-					        <td style=" text-align: center"><font color="#ffA500" size="3" >${address.getReceiverName()}</font></td>
+					        <td style=" text-align: center"><font color="#ffA500" size="3" >${address.getRecevierName()}</font></td>
 					        <td style=" text-align: center">
 					           <a href="#" onclick="window.confirm('是否删除？')?
 					                this.href='<%=request.getContextPath()%>/foreground/customer/delAddressByaddressId.action?addressId=${address.getAddressId()}'
@@ -214,6 +213,8 @@
 					    </tr>
 		     </c:forEach>
 		     </table>
+		     <input class="layui-btn" type="button" name="addAddress" id="addAddress" 
+		       style="font-size:20px;background-color:black;color:#ffA500;outline: none" value="添加收货地址">	
 	     </div>
          <!-- 	    历史订单 -->
 	    <input class="layui-btn" type="submit" name="showAddress" id="showAddress" 
@@ -237,8 +238,9 @@
 					        <td style=" text-align: center"><font color="#ffA500" size="3" >${order.getAmountOfMoney()}</font></td>
 					        <td style=" text-align: center"><font color="#ffA500" size="3" >${order.getStatus()}</font></td>
 					        <td style=" text-align: center"><font color="#ffA500" size="3" >${order.getCreateTime()}</font></td>
-					        <td style=" text-align: center"><font color="#ffA500" size="3" >${order.getCustomerId()}</font></td>
-					        <td style=" text-align: center"><font color="#ffA500" size="3" >${order.getCustomerAddressId()}</font></td>  
+					        
+					        <td style=" text-align: center"><font color="#ffA500" size="3" >${order.getCustomerAddress().getAddressId()}</font></td> 
+					        <td style=" text-align: center"><font color="#ffA500" size="3" >${order.getCustomerId()}</font></td> 
 					        <td style=" text-align: center">
 					           <a href="#" onclick="Turn(${order.getOrderId()})">
 					               <i class="layui-icon layui-icon-menu-fill"></i>
@@ -246,7 +248,7 @@
 					        </td>  
 					        <td style=" text-align: center">
 					           <a href="#" onclick="window.confirm('是否删除？')?
-					                this.href='<%=request.getContextPath()%>/foreground/dish/delAddressByaddressId.action?orderId=${order.getOrderId()}'
+					                this.href='<%=request.getContextPath()%>/foreground/customer/delOrderByorderId.action?orderId=${order.getOrderId()}'
 					               :this.href='javascript:void()';">
 					               <i class="layui-icon layui-icon-delete"></i>
 					           </a>

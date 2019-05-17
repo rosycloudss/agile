@@ -88,7 +88,7 @@
         	  		  success:function(data){	
         	  			var obj = JSON.parse(data);
         	  			if(obj.result==1){
-        	  				layer.msg('添加成功',{time:1000});
+        	  				alert("添加成功");
         	  				window.parent.location.reload();
         	  				window.parent.layer.closeAll();
         	  			}

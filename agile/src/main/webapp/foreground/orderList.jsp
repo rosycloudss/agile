@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>添加地址</title>
+<title>订单详情</title>
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/layui/css/layui.css">
 <link rel="stylesheet"
@@ -31,16 +31,16 @@
 <script>
 
 </script>
-        
         <div class="x-body">
-             <form class="layui-form">          
+             <form class="layui-form">    
+                  <div style="margin-left:150px"><p><font color="#ffA500" size="4" >地址信息</font></p></div>      
                   <div class="layui-form-item">
                       <label for="customerId" class="layui-form-label">
                           <span class="x-red">*</span><font color="#ffA500" size="4" >客户编号</font>
                       </label>
                       <div class="layui-input-inline">
-                          <input type="text" id="customerId" name="customerId" required="" lay-verify="customerId"
-                          autocomplete="off" class="layui-input" readonly="true" value="<%=((Customer)(request.getSession().getAttribute("customer"))).getCustomerId()%>">
+                          <input type="text" id="customerId" name="customerId" 
+                          autocomplete="off" class="layui-input" readonly="true" >
                       </div>
                   </div>
                   <div class="layui-form-item">
@@ -48,8 +48,8 @@
                           <span class="x-red">*</span><font color="#ffA500" size="4" >地址</font>
                       </label>
                       <div class="layui-input-inline">
-                          <input type="text" id="address" name="address" required="" lay-verify="address"
-                          autocomplete="off" class="layui-input">
+                          <textarea rows="3" cols="20" id="address" name="address" 
+                          autocomplete="off" class="layui-input" readonly="true"></textarea>
                       </div>
                   </div>
                  <div class="layui-form-item">
@@ -57,8 +57,8 @@
                          <span class="x-red">*</span><font color="#ffA500" size="4" >电话号码</font>
                      </label>
                      <div class="layui-input-inline">
-                         <input type="text" id="phone" name="phone" required="" lay-verify="phone"
-                                autocomplete="off" class="layui-input">
+                         <input type="text" id="phone" name="phone" 
+                                autocomplete="off" class="layui-input" readonly="true">
                      </div>
                  </div>
                  <div class="layui-form-item">
@@ -66,71 +66,70 @@
                          <span class="x-red">*</span><font color="#ffA500" size="4" >收货人姓名</font>
                      </label>
                      <div class="layui-input-inline">
-                         <input type="text" id="recevierName" name="recevierName" required="" lay-verify="recevierName"
-                                autocomplete="off" class="layui-input">
+                         <input type="text" id="recevierName" name="recevierName" 
+                                autocomplete="off" class="layui-input" readonly="true">
                      </div>
                  </div>
-                 <div class="layui-form-item">
-                     <label class="layui-form-label"></label>
-                     <button id="add" type="button" class="layui-btn" lay-filter="add" lay-submit="">增加</button>
-                 </div>
+                 <div style="margin-left:150px"><p><font color="#ffA500" size="4" >订单信息</font></p></div>
+                 <div style=" text-align: center">
+				    <table class="layui-table" style=" text-align: center" id="table">
+				    <tr>
+				        <th style=" text-align: center"><font color="#ffA500" size="3" >名称</font></th>
+				        <th style=" text-align: center"><font color="#ffA500" size="3" >单价</font></th>
+				        <th style=" text-align: center"><font color="#ffA500" size="3" >数量</font></th>
+				        <th style=" text-align: center"><font color="#ffA500" size="3" >总价</font></th>
+				    </tr>
+				    <tbody id="tbody">
+				    
+				    </tbody>
+				    </table>
+			    </div>
           </form>
         </div>
         <script>
-//         传递过来的orderId
-        var addstr= document.URL;
-        var num=addstr.indexOf("?")
-        addstr=addstr.substr(num+1);
+       
         $(function(){
-        	$("#add").click(function(){
-        		var customerId=$("#customerId").val();
-        		var address=$("#address").val();
-        		var phone=$("#phone").val();
-        		var receiverName=$("#recevierName").val();
+        	 var str = document.URL;
+             var num = str.indexOf("=");
+             var orderId = str.substr(num+1);
         		 $.ajax({
-        	  		  url:"/agile/foreground/customer/insertAddress/"+customerId+"/"+address+"/"+phone+"/"+receiverName,  
+        	  		  url:"/agile/foreground/customer/getOrderAndAddress/" + orderId,
         	  		  success:function(data){	
         	  			var obj = JSON.parse(data);
-        	  			if(obj.result==1){
-        	  				layer.msg('添加成功',{time:1000});
-        	  				window.parent.location.reload();
-        	  				window.parent.layer.closeAll();
+        	  			var totalPrice = obj.totalPrice;
+        	  			var address = obj.address;
+        	  			var orderDetailList = obj.orderDetailList;
+        	  			
+        	  			
+        	  			document.getElementById("customerId").value = address.customerId;
+        	  			document.getElementById("address").value = address.address;
+        	  			document.getElementById("phone").value = address.phone;
+        	  			document.getElementById("recevierName").value = address.recevierName;
+        	  			var tableData;
+        	  			for(var i=0;i<orderDetailList.length;i++){
+        	  				if(i < orderDetailList.length-1)
+	        	  				tableData+="<tr>"+
+	        	  				'<td style=" text-align: center"><font color="#ffA500" size="3" >'+orderDetailList[i].name+'</font></td>'+
+	    	  					'<td style=" text-align: center"><font color="#ffA500" size="3" >'+orderDetailList[i].singlePrice+'</font></td>'+
+	    	  					'<td style=" text-align: center"><font color="#ffA500" size="3" >'+orderDetailList[i].number+'</font></td>'+
+	    	  					"</tr>";
+	    	  				else if(i == orderDetailList.length-1){
+	    	  					tableData+="<tr>"+
+	        	  				'<td style=" text-align: center"><font color="#ffA500" size="3" >'+orderDetailList[i].name+'</font></td>'+
+	    	  					'<td style=" text-align: center"><font color="#ffA500" size="3" >'+orderDetailList[i].singlePrice+'</font></td>'+
+	    	  					'<td style=" text-align: center"><font color="#ffA500" size="3" >'+orderDetailList[i].number+'</font></td>'+
+	    	  					'<td style=" text-align: center"><font color="#ffA500" size="3" >'+totalPrice+'</font></td>'+
+	    	  					"</tr>";
+	    	  				}	
+        	  				$("#tbody").html(tableData);
         	  			}
         	  		  },
-        	  		  error:function(data){
-        	  			layer.msg('添加失败',{time:1000});
+        	  		  error:function(){
+        	  			alert("error");
         	  		  }
         	     });
-        	 });
         });
-            layui.use(['form','layer'], function(){
-                $ = layui.jquery;
-                var form = layui.form,layer = layui.layer;
-
-                //自定义验证规则
-                form.verify({
-                	customerId: function(value){
-                        if(value === '' || value === null){
-                            return '客户编号不能为空';
-                        }
-                    }
-                    ,address: function(value){
-                        if(value === '' || value === null){
-                            return '地址不能为空';
-                        }
-                    }
-                    ,phone: function(value){
-                        if(value === '' || value === null){
-                            return '电话号码不能为空';
-                        }
-                    }
-                    ,recevierName: function(value){
-                        if(value === '' || value === null){
-                            return '收件人姓名不能为空';
-                        }
-                    }
-                });
-            });
+            
     </script>
 </body>
 </html>

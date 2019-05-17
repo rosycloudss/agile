@@ -1,5 +1,7 @@
 package com.order.mapper;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -18,4 +20,6 @@ public interface OrderDishMapper {
     int updateByPrimaryKeySelective(OrderDish record);
 
     int updateByPrimaryKey(OrderDish record);
+    
+    List<OrderDish> selectByOrderId(String orderId);
 }

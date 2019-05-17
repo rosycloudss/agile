@@ -21,6 +21,16 @@
 		where order_id = #{orderId,jdbcType=VARCHAR}
 		and dish_id = #{dishId,jdbcType=INTEGER}
 	</select>
+	
+	<select id="selectByOrderId" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		<!--@mbg.generated -->
+		select
+		<include refid="Base_Column_List" />
+		from tb_order_dish
+		where order_id = #{orderId,jdbcType=VARCHAR}
+	</select>
+	
 	<delete id="deleteByPrimaryKey" parameterType="map">
 		<!--@mbg.generated -->
 		delete from tb_order_dish

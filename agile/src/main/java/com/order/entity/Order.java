@@ -25,8 +25,29 @@ public class Order {
     * 
     */
     private Date createTime;
+    
+    private Integer customerId;
+    
+    private CustomerAddress customerAddress;
+    
 
-    public String getOrderId() {
+    public CustomerAddress getCustomerAddress() {
+		return customerAddress;
+	}
+
+	public void setCustomerAddress(CustomerAddress customerAddress) {
+		this.customerAddress = customerAddress;
+	}
+
+	public Integer getCustomerId() {
+		return customerId;
+	}
+
+	public void setCustomerId(Integer customerId) {
+		this.customerId = customerId;
+	}
+
+	public String getOrderId() {
         return orderId;
     }
 

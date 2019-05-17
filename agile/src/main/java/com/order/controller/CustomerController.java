@@ -18,7 +18,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.order.entity.*;
 import com.order.service.CustomerAddressService;
 import com.order.service.CustomerService;
+import com.order.service.DishService;
 import com.order.service.ImgService;
+import com.order.service.OrderDishService;
+import com.order.service.OrderService;
 
 /**
  * 
@@ -33,11 +36,20 @@ public class CustomerController{
 	private final CustomerService customerService;
 	private final CustomerAddressService customerAddressService;
 	private final ImgService imgService;
+	private final OrderService orderService;
+	private final OrderDishService orderDishService;
+	private final DishService dishService;
 	@Autowired
-	public CustomerController(CustomerService customerService,CustomerAddressService customerAddressService,ImgService imgService) {
+	public CustomerController(CustomerService customerService,
+			CustomerAddressService customerAddressService,
+			ImgService imgService,OrderService orderService,
+			OrderDishService orderDishService,DishService dishService) {
 		this.customerService = customerService;
-		this.customerAddressService=customerAddressService;
-		this.imgService=imgService;
+		this.customerAddressService = customerAddressService;
+		this.imgService = imgService;
+		this.orderService = orderService;
+		this.orderDishService=orderDishService;
+		this.dishService=dishService;
 	}
 
 	/**
@@ -50,7 +62,6 @@ public class CustomerController{
 	 */
 	@RequestMapping(value = "/login.action", method = RequestMethod.POST)
 	public String login(String account,String password,HttpSession session,Model model) {
-		System.out.println(account + "====" + password);
 		Customer customer = customerService.login(account, password);
 		if(customer != null) {
 			session.setAttribute("customer", customer);
@@ -126,24 +137,28 @@ public class CustomerController{
 	 */
 	@RequestMapping(value="getAddressByCustomerId.action",method=RequestMethod.GET)
 	public String getAddressByCustomerId(HttpSession session,Model model,HttpRequest request) {
-		List<CustomerAddress> addressList=customerAddressService.getAddressByCustomerId
-				              (((Customer)(session.getAttribute("customer"))).getCustomerId());
+		int customerId = ((Customer)(session.getAttribute("customer"))).getCustomerId();
+		List<CustomerAddress> addressList=customerAddressService.getAddressByCustomerId(customerId);
 		Customer customer=customerService.selectByPrimaryKey(((Customer)(session.getAttribute("customer"))).getCustomerId());
 		model.addAttribute("addressList",addressList);
 		model.addAttribute("customer",customer);
 		
+		List<Order> orderList=orderService.selectByCustomerId(customerId);
+		model.addAttribute("orderList", orderList);
+		
 		return "foreground/personalCenter";
 	}
 	/*
-	 * 删除地址
+	 * 删除订单
 	 */
-	@RequestMapping(value="delAddressByaddressId.action",method=RequestMethod.GET)
-	public String delAddressByaddressId(@RequestParam("addressId") int addressId,HttpSession session,HttpRequest request,Model model) {
-		customerAddressService.deleteByPrimaryKey(addressId);
+	@RequestMapping(value="delOrderByorderId.action",method=RequestMethod.GET)
+	public String delOrderByorderId(@RequestParam("orderId") String orderId,HttpSession session,HttpRequest request,Model model) {
+		orderService.deleteByPrimaryKey(orderId);
 		
-		List<CustomerAddress> addressList=customerAddressService.getAddressByCustomerId
-	              (((Customer)(session.getAttribute("customer"))).getCustomerId());
-
+		int customerId = ((Customer)(session.getAttribute("customer"))).getCustomerId();
+		List<CustomerAddress> addressList=customerAddressService.getAddressByCustomerId(customerId);
+		List<Order> orderList=orderService.selectByCustomerId(customerId);
+		model.addAttribute("orderList", orderList);
 		model.addAttribute("addressList",addressList);
 		
 		return "foreground/personalCenter";
@@ -177,5 +192,53 @@ public class CustomerController{
 		int result=customerService.updatePhone(phone,customerId);
 		jsonObject.put("result", result);
 		return jsonObject;
+	}
+	/*
+	 * 删除地址
+	 */
+	@RequestMapping(value="delAddressByaddressId.action",method=RequestMethod.GET)
+	public String delAddressByaddressId(@RequestParam("addressId") int addressId,HttpSession session,HttpRequest request,Model model) {
+		customerAddressService.deleteByPrimaryKey(addressId);
+		int customerId = ((Customer)(session.getAttribute("customer"))).getCustomerId();
+		List<CustomerAddress> addressList=customerAddressService.getAddressByCustomerId(customerId);
+		List<Order> orderList=orderService.selectByCustomerId(customerId);
+		model.addAttribute("orderList", orderList);
+		model.addAttribute("addressList",addressList);
+		
+		return "foreground/personalCenter";
+	}
+	/*
+	 * 获取订单详情
+	 */
+	@ResponseBody
+	@RequestMapping("/getOrderAndAddress/{orderId}")
+	public JSONObject getOrderAndAddress(@PathVariable("orderId") String orderId) {
+		JSONObject jsonObject=new JSONObject();
+		List<OrderDish> orderDishList=orderDishService.selectByOrderId(orderId);
+		List<OrderDetail> orderDetailList=new ArrayList<>();
+		float totalPrice=0;
+		for(int i=0;i<orderDishList.size();i++) {
+			OrderDish orderDish=orderDishList.get(i);
+			int number=orderDish.getDishNum();
+			Dish dish=dishService.selectByPrimaryKey(orderDish.getDishId());
+			String dishName=dish.getName();
+			Float singlePrice=dish.getPrice();
+			
+			OrderDetail orderDetail=new OrderDetail();
+			orderDetail.setName(dishName);
+			orderDetail.setNumber(number);
+			orderDetail.setSinglePrice(singlePrice);
+			orderDetailList.add(orderDetail);
+			
+			totalPrice+=singlePrice*number;
+		}
+		
+		jsonObject.put("orderDetailList", orderDetailList);
+		jsonObject.put("totalPrice", totalPrice);
+		
+		CustomerAddress address=orderService.selectByPrimaryKey(orderId).getCustomerAddress();
+		
+	    jsonObject.put("address",address);
+	    return jsonObject;
 	}
 }
