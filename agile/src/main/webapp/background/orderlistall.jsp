@@ -70,10 +70,10 @@ $(document).ready(function(){
     
     <thead>
     <tr>
-    <th width="100px;">缩略图</th>
-    <th>编号</th>
-    <th>类别</th>
-    <th>名称</th>
+    <th width="100px;">订单编号</th>
+    <th>总价</th>
+    <th>状态</th>
+    <th>创建时间</th>
     <th>描述</th>
     <th>剩余份数</th>
     <th>价格</th>
@@ -81,7 +81,7 @@ $(document).ready(function(){
     </thead>
     
     <tbody>
-    <c:forEach items="${dishList}" var="dish">
+    <%-- <c:forEach items="${dishList}" var="dish">
     	<tr>
 	    <td class="imgtd"><img width="90" src="<%=request.getContextPath() %>/${dish.img.imgUrl} "/></td>
 	    <td><a href="#">${dish.dishId}</a></td>
@@ -91,7 +91,7 @@ $(document).ready(function(){
 	    <td>${dish.leftNum}</td>
 	    <td>${dish.price}</td>
 	    </tr>
-    </c:forEach>
+    </c:forEach> --%>
     </tbody>
     
     </table>
@@ -99,7 +99,7 @@ $(document).ready(function(){
     <div class="xline"></div>
     
     <div class="pagin">
-    	<div class="message">共<i class="blue">${pageItem.totalRecord}</i>条记录，当前显示第&nbsp;<i class="blue">${pageItem.pageCurrent }&nbsp;</i>页</div>
+    	<div class="message">共<i class="blue">${dishList.size()}</i>条记录，当前显示第&nbsp;<i class="blue">1&nbsp;</i>页</div>
         <ul class="paginList">
         <li class="paginItem"><a href="javascript:;"><span class="pagepre"></span></a></li>
         <li class="paginItem current"><a href="javascript:;">1</a></li>

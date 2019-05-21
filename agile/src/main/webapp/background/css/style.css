@@ -97,13 +97,14 @@ h2{font-weight:normal;}
 .place span{line-height:40px; font-weight:bold;float:left; margin-left:12px;}
 .placeul li{float:left; line-height:40px; padding-left:7px; padding-right:12px; background:url(../images/rlist.gif) no-repeat right;}
 .placeul li:last-child{background:none;}
-.rightinfo{padding:8px;}
+.rightinfo{padding:8px; border:1px}
 .tools{clear:both; height:35px; margin-bottom:8px;}
 .toolbar{float:left;}
 .toolbar li{background:url(../images/toolbg.gif) repeat-x; line-height:33px; height:33px; border:solid 1px #d3dbde; float:left; padding-right:10px; margin-right:5px;border-radius: 3px; behavior:url(js/pie.htc); cursor:pointer;}
 .toolbar li span{float:left; margin-left:10px; margin-right:5px; margin-top:5px;}
+.toolbar2{float:left;}
 .toolbar1{float:right;}
-.toolbar1 li{background:url(../images/toolbg.gif) repeat-x; line-height:33px; height:33px; border:solid 1px #d3dbde; float:left; padding-right:10px; margin-left:5px;border-radius: 3px; behavior:url(js/pie.htc);}
+.toolbar1 li{background:url(../images/toolbg.gif) repeat-x; line-height:33px; border:solid 1px #d3dbde; float:left; padding-right:10px; margin-left:5px;border-radius: 5px; behavior:url(js/pie.htc);}
 .toolbar1 li span{float:left; margin-left:10px; margin-right:5px; margin-top:5px;}
 .tablelist{border:solid 1px #cbcbcb; width:100%; clear:both;}
 .tablelist th{background:url(../images/th.gif) repeat-x; height:34px; line-height:34px; border-bottom:solid 1px #b6cad2; text-indent:11px; text-align:left;}
@@ -114,7 +115,7 @@ h2{font-weight:normal;}
 .sort{padding-left:3px;}
 
 /*page*/
-.pagin{position:relative;margin-top:10px;padding:0 12px;}
+.pagin{position:relative;margin-top:40px; margin-bottom: 30px; padding:0 12px;}
 .pagin .blue{color:#056dae;font-style:normal;}
 .pagin .paginList{position:absolute;right:12px;top:0;}
 .pagin .paginList .paginItem{float:left;}
@@ -206,6 +207,21 @@ h2{font-weight:normal;}
 .sure ,.cancel{width:96px; height:35px; line-height:35px; color:#fff; background:url(../images/btnbg1.png) repeat-x; font-size:14px; font-weight:bold;border-radius: 3px; cursor:pointer;}
 .cancel{background:url(../images/btnbg2.png) repeat-x;color:#000;font-weight:normal;}
 
+/*editform*/
+.editform{position:absolute;top:10%; left:25%;background:#fcfdfd;box-shadow:1px 8px 10px 1px #9b9b9b;border-radius:8px;behavior:url(js/pie.htc); display:none; z-index:111111;}
+.editformtop{height:40px; line-height:40px; background:url(../images/tcbg.gif)  repeat-x; cursor:pointer; border-top-left-radius: 8px;border-top-right-radius: 8px;}
+.editformtop span{font-size:14px; font-weight:bold; color:#fff;float:left; text-indent:20px;}
+.editformtop a{display:block; background:url(../images/close.png) no-repeat; width:22px; height:22px;float:right;margin-right:7px; margin-top:10px; cursor:pointer;}
+.editformtop a:hover{background:url(../images/close1.png) no-repeat;}
+.editforminfo{margin:34px;}
+.editforminfo span{height:33px;float:left;}
+.editformright{float:left; margin-bottom: 30px;}
+.editformright p{font-size:14px; font-weight:bold; line-height:35px;}
+.editformright cite{color:#858686;}
+.editformbtn{margin-top:25px; margin-left:125px;}
+.sure ,.cancel{width:96px; height:35px; line-height:35px; color:#fff; background:url(../images/btnbg1.png) repeat-x; font-size:14px; font-weight:bold;border-radius: 3px; cursor:pointer;}
+.cancel{background:url(../images/btnbg2.png) repeat-x;color:#000;font-weight:normal;}
+
 /*tools*/
 .toolsli{clear:both; overflow:hidden; margin-bottom:20px;}
 .toollist{margin-left:20px; overflow:hidden; float:left;}
@@ -249,7 +265,7 @@ h2{font-weight:normal;}
 
 /*imglist*/
 .imglist{clear:both; overflow:hidden; margin-bottom:20px; margin-left:5px;}
-.imglist li{width:188px; border:solid 1px #fff;height:199px;float:left; margin-right:8px; margin-bottom:10px; cursor:pointer;}
+.imglist li{width:188px; border:solid 1px #bde2f3;height:199px;float:left; margin-right:8px; margin-bottom:10px; cursor:pointer;}
 .imglist li:hover{border:solid 1px #d7e4ea;}
 .imglist li span{width:168px; height:126px; margin:8px;}
 .imglist li h2{text-align:center; line-height:25px;}
@@ -259,7 +275,7 @@ h2{font-weight:normal;}
 
 /*imgtable*/
 .imgtable{width:100%;border:solid 1px #cbcbcb; }
-.imgtable th{background:url(../images/th.gif) repeat-x; height:34px; line-height:34px; border-bottom:solid 1px #b6cad2; text-indent:21px; text-align:left;}
+.imgtable th{background:url(../images/th.gif) repeat-x; height:34px; line-height:34px; border-bottom:solid 1px #b6cad2; text-indent:21px; text-align:center;}
 .imgtable td{line-height:20px; text-indent:21px; border-right: dotted 1px #c7c7c7;}
 .imgtable td img{margin:10px 20px 10px 0;}
 .imgtable td p{color:#919191;}

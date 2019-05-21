@@ -17,17 +17,16 @@ $(function(){
 })	
 </script>
 
-
 </head>
 
 <body style="background:url(images/topbg.gif) repeat-x;">
 
     <div class="topleft">
-    <a href="main.html" target="_parent"><img src="images/logo.png" title="系统首页" /></a>
+    <a href="main.jsp" target="_parent"><img src="images/logo.png" title="系统首页" /></a>
     </div>
         
     <ul class="nav">
-    <li><a href="index.html" target="rightFrame" class="selected"><img src="images/icon01.png" title="工作台" /><h2>工作台</h2></a></li>
+    <li><a href="index.jsp" target="rightFrame" class="selected"><img src="images/icon01.png" title="工作台" /><h2>工作台</h2></a></li>
     <li><a href="#"><img src="images/icon06.png" title="系统设置" /><h2>系统设置</h2></a></li>
     </ul>
             
@@ -35,14 +34,14 @@ $(function(){
     <ul>
     <li><span><img src="images/help.png" title="帮助"  class="helpimg"/></span><a href="#">帮助</a></li>
     <li><a href="#">关于</a></li>
-    <li><a href="login.jsp" target="_parent">退出</a></li>
+    <li><a href="<%=request.getContextPath() %>/background/manage/employeelogout.action" target="_parent" >退出</a></li>
     </ul>
      
     <div class="user">
     <span>hello,${sessionScope.employee.getName() }</span>
     <i>消息</i>
-    <b>5</b>
-    </div>    
+    <b>0</b>
+    </div> 
     
     </div>
 </body>

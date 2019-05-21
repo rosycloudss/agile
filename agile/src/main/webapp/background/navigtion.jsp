@@ -40,9 +40,9 @@ $(function(){
     <span><img src="images/leftico01.png" /></span>菜单管理
     </div>
     	<ul class="menuson">
-        <li class="active"><cite></cite><a href="<%=request.getContextPath() %>/background/manage/alldishes.action" target="rightFrame">菜单信息列表</a><i></i></li>
+        <li ><cite></cite><a href="<%=request.getContextPath() %>/background/manage/getdishes.action?type=1&page=1" target="rightFrame">菜单信息列表</a><i></i></li>
         <li><cite></cite><a href="<%=request.getContextPath() %>/background/adddish.jsp" target="rightFrame">增加新菜单</a><i></i></li>
-        <li><cite></cite><a href="<%=request.getContextPath() %>/background/editdish.jsp" target="rightFrame">编辑菜品信息</a><i></i></li>
+        <li><cite></cite><a href="<%=request.getContextPath() %>/background/manage/getdishes.action?type=2&page=1" target="rightFrame">编辑菜品信息</a><i></i></li>
         </ul>    
     </dd>
         
@@ -53,9 +53,9 @@ $(function(){
     </div>
     <ul class="menuson">
         <li><cite></cite><a href="#">编辑菜品类别</a><i></i></li>
-        <li><cite></cite><a href="#">发布菜品类别</a><i></i></li>
-        <li><cite></cite><a href="#">菜品类别查询</a><i></i></li>
-        </ul>     
+         <li><cite></cite><a href="<%=request.getContextPath() %>/background/dishcategory_add.jsp" target="rightFrame">发布菜品类别</a><i></i></li>
+        <li><cite></cite><a href="<%=request.getContextPath() %>/background/feng/dishcategory_list.action" target="rightFrame">菜品类别查询</a><i></i></li>
+    </ul>     
     </dd> 
     
     <dd><div class="title"><span><img src="images/leftico03.png" /></span>公告信息管理（待定）</div>
