@@ -11,6 +11,8 @@ public interface EmployeeService{
 
     int insertSelective(Employee record);
 
+    Employee selectByAccount(String account);
+    
     Employee selectByPrimaryKey(Integer employeeId);
     
     Employee login(String account,String password);

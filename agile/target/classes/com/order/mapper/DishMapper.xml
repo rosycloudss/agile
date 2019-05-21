@@ -63,11 +63,11 @@
 	<insert id="insert" parameterType="com.order.entity.Dish">
 		<!--@mbg.generated -->
 		insert into tb_dish (dish_id, category_id, dish_img,
-		`NAME`, description, left_num
+		`NAME`, description, left_num, price
 		)
 		values (#{dishId,jdbcType=INTEGER}, #{categoryId,jdbcType=INTEGER},
 		#{dishImg,jdbcType=INTEGER},
-		#{name,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{leftNum,jdbcType=INTEGER}
+		#{name,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{leftNum,jdbcType=INTEGER}, #{price}
 		)
 	</insert>
 	<insert id="insertSelective"
@@ -128,6 +128,9 @@
 			</if>
 			<if test="name != null">
 				`NAME` = #{name,jdbcType=VARCHAR},
+			</if>
+			<if test="price != null">
+				price = #{price,jdbcType=VARCHAR},
 			</if>
 			<if test="description != null">
 				description = #{description,jdbcType=VARCHAR},

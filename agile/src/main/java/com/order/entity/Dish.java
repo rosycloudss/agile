@@ -87,4 +87,19 @@ public class Dish {
     public void setImg(Img img) {
         this.img = img;
     }
+    
+    @Override
+	public String toString() {
+    	StringBuffer sb = new StringBuffer();
+		sb.append("{ ");
+		sb.append("\"dishId\":\"").append(getDishId()).append("\",");
+		sb.append("\"categoryId\":\"").append(getCategoryId()).append("\",");
+		sb.append("\"name\":\"").append(getName()).append("\",");
+		sb.append("\"price\":\"").append(getPrice()).append("\",");
+		sb.append("\"dishImg\":\"").append(getDishImg()).append("\",");
+		sb.append("\"description\":\"").append(getDescription()).append("\",");
+		sb.append("\"leftNum\":\"").append(getLeftNum()).append("\"");
+		sb.append("}");
+		return sb.toString();
+	}
 }

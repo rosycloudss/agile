@@ -13,6 +13,8 @@ public interface EmployeeMapper {
 
     int insertSelective(Employee record);
 
+    Employee selectByAccount(String account);
+    
     Employee selectByPrimaryKey(Integer employeeId);
 
     int updateByPrimaryKeySelective(Employee record);

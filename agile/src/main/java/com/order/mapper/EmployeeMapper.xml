@@ -25,6 +25,16 @@
 		employee_id, account, pwd, phone, `NAME`, create_time, `STATUS`,
 		role_id, head_img
 	</sql>
+	
+	<select id="selectByAccount"
+		parameterType="string" resultMap="BaseResultMap">
+		<!--@mbg.generated -->
+		select
+		<include refid="Base_Column_List" />
+		from tb_employee
+		where account = #{account,jdbcType=INTEGER}
+	</select>
+	
 	<select id="selectByPrimaryKey"
 		parameterType="java.lang.Integer" resultMap="BaseResultMap">
 		<!--@mbg.generated -->

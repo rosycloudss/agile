@@ -42,5 +42,10 @@ public class EmployeeServiceImpl implements EmployeeService{
 		}
 		return null;
 	}
+	
+	@Override
+	public Employee selectByAccount(String account) {
+		return employeeMapper.selectByAccount(account);
+	}
    
 }
