@@ -33,44 +33,21 @@
 </script>
         <div class="x-body">
              <form class="layui-form">    
-                  <div style="margin-left:150px"><p><font color="#ffA500" size="4" >地址信息</font></p></div>      
-                  <div class="layui-form-item">
-                      <label for="customerId" class="layui-form-label">
-                          <span class="x-red">*</span><font color="#ffA500" size="4" >客户编号</font>
-                      </label>
-                      <div class="layui-input-inline">
-                          <input type="text" id="customerId" name="customerId" 
-                          autocomplete="off" class="layui-input" readonly="true" >
-                      </div>
-                  </div>
-                  <div class="layui-form-item">
-                      <label for="address" class="layui-form-label">
-                          <span class="x-red">*</span><font color="#ffA500" size="4" >地址</font>
-                      </label>
-                      <div class="layui-input-inline">
-                          <textarea rows="3" cols="20" id="address" name="address" 
-                          autocomplete="off" class="layui-input" readonly="true"></textarea>
-                      </div>
-                  </div>
-                 <div class="layui-form-item">
-                     <label for="phone" class="layui-form-label">
-                         <span class="x-red">*</span><font color="#ffA500" size="4" >电话号码</font>
-                     </label>
-                     <div class="layui-input-inline">
-                         <input type="text" id="phone" name="phone" 
-                                autocomplete="off" class="layui-input" readonly="true">
-                     </div>
-                 </div>
-                 <div class="layui-form-item">
-                     <label for="recevierName" class="layui-form-label">
-                         <span class="x-red">*</span><font color="#ffA500" size="4" >收货人姓名</font>
-                     </label>
-                     <div class="layui-input-inline">
-                         <input type="text" id="recevierName" name="recevierName" 
-                                autocomplete="off" class="layui-input" readonly="true">
-                     </div>
-                 </div>
-                 <div style="margin-left:150px"><p><font color="#ffA500" size="4" >订单信息</font></p></div>
+                 <div style="margin-left:280px"><p><font color="#ffA500" size="4" >地址信息</font></p></div>      
+                 <div style=" text-align: center">
+				    <table class="layui-table" style=" text-align: center" id="table">
+				    <tr>
+				        <th style=" text-align: center"><font color="#ffA500" size="3" >客户编号</font></th>
+				        <th style=" text-align: center"><font color="#ffA500" size="3" >地址</font></th>
+				        <th style=" text-align: center"><font color="#ffA500" size="3" >电话号码</font></th>
+				        <th style=" text-align: center"><font color="#ffA500" size="3" >收件人姓名</font></th>
+				    </tr>
+				    <tbody id="tbody1">
+				    
+				    </tbody>
+				    </table>
+			     </div>
+                 <div style="margin-left:280px"><p><font color="#ffA500" size="4" >订单信息</font></p></div>
                  <div style=" text-align: center">
 				    <table class="layui-table" style=" text-align: center" id="table">
 				    <tr>
@@ -79,7 +56,7 @@
 				        <th style=" text-align: center"><font color="#ffA500" size="3" >数量</font></th>
 				        <th style=" text-align: center"><font color="#ffA500" size="3" >总价</font></th>
 				    </tr>
-				    <tbody id="tbody">
+				    <tbody id="tbody2">
 				    
 				    </tbody>
 				    </table>
@@ -101,10 +78,15 @@
         	  			var orderDetailList = obj.orderDetailList;
         	  			
         	  			
-        	  			document.getElementById("customerId").value = address.customerId;
-        	  			document.getElementById("address").value = address.address;
-        	  			document.getElementById("phone").value = address.phone;
-        	  			document.getElementById("recevierName").value = address.recevierName;
+        	  			var addressData;
+        	  			addressData+="<tr>"+
+    	  				'<td style=" text-align: center"><font color="#ffA500" size="3" >'+address.customerId+'</font></td>'+
+	  					'<td style=" text-align: center"><font color="#ffA500" size="3" >'+address.address+'</font></td>'+
+	  					'<td style=" text-align: center"><font color="#ffA500" size="3" >'+address.phone+'</font></td>'+
+	  					'<td style=" text-align: center"><font color="#ffA500" size="3" >'+address.recevierName+'</font></td>'+
+	  					"</tr>";
+	  					$("#tbody1").html(addressData);
+	  					
         	  			var tableData;
         	  			for(var i=0;i<orderDetailList.length;i++){
         	  				if(i < orderDetailList.length-1)
@@ -121,7 +103,7 @@
 	    	  					'<td style=" text-align: center"><font color="#ffA500" size="3" >'+totalPrice+'</font></td>'+
 	    	  					"</tr>";
 	    	  				}	
-        	  				$("#tbody").html(tableData);
+        	  				$("#tbody2").html(tableData);
         	  			}
         	  		  },
         	  		  error:function(){

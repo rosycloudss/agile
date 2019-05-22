@@ -136,8 +136,8 @@
 <%-- 						    href="<%=request.getContextPath()%>/foreground/customer/getAddressByCustomerId.action">个人中心</a></label> --%>
 						<label style="margin-right: 10px"><a
 							href="<%=request.getContextPath()%>/foreground/customer/logout.action">退出登录</a></label>
-						<button class="layui-btn" type="button" name="modifyPassword" id="modifyPassword"
-		                        style="font-size:15px;background-color:black;color: #35BB34;outline: none">修改密码</button> 		
+						<Label name="modifyPassword" id="modifyPassword"
+		                        style="font-size:15px;background-color:black;color: #35BB34;outline: none">修改密码</Label> 		
 					</c:otherwise>
 				</c:choose>
 			</div>

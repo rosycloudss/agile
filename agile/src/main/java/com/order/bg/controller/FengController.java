@@ -1,4 +1,4 @@
-package com.order.controller;
+package com.order.bg.controller;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.order.controller;
+package com.order.bg.controller;
 
 import java.io.File;
 import java.io.IOException;
