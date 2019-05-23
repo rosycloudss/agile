@@ -42,6 +42,11 @@
 	<insert id="insertSelective"
 		parameterType="com.order.entity.Img">
 		<!--@mbg.generated -->
+		<selectKey keyColumn="img_id" keyProperty="imgId" order="AFTER"
+			resultType="Integer">
+			SELECT LAST_INSERT_ID()
+		</selectKey>
+		
 		insert into tb_img
 		<trim prefix="(" suffix=")" suffixOverrides=",">
 			<if test="imgId != null">
