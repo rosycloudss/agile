@@ -188,37 +188,25 @@ public class ManageController {
 	
 	//查询所有菜品，返回list数据结构
 	@RequestMapping(value = "/getdishes.action", method = RequestMethod.GET)
-	public String getDishesByPage(Model model,String type,Integer page) {
+	public String getDishesByPage(Model model,Integer type,Integer page) {
 
 
 		List<Dish> dishList;
 		
-		Page pageItem=new Page();
-		pageItem.setPageStart(page);
-		
-		List<Dish> list = dishService.getAll(null);
+		Page pageItem=new Page(dishService.countDish(null),page,10);
 
-		pageItem.setPageSize(20);
-		pageItem.setPageCurrent(page);
-		pageItem.setTotalPage(list.size()/pageItem.getPageSize()+1);
-		pageItem.setTotalRecord(list.size());
-		
-		if(page*pageItem.getPageSize()<=list.size()) {
-			
-			dishList=list.subList((page-1)*pageItem.getPageSize(), page*pageItem.getPageSize());
-		}else {
-			
-			dishList=list.subList((page-1)*pageItem.getPageSize(), list.size());
-		}
+		if(type==2) pageItem.setPageSize(12);
+		dishList=dishService.getAll(pageItem);
+		System.out.println(dishList);
 		
         model.addAttribute("dishList", dishList);
         model.addAttribute("pageItem", pageItem);
         
         switch(type){
-        case "1":
+        case 1:
     		return "/background/dishinfolist";
     		
-        case "2":
+        case 2:
             return "/background/editdish";
             
         default:

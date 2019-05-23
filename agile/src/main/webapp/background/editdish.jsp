@@ -91,8 +91,7 @@ $(document).ready(function(){
     <span>位置：</span>
     <ul class="placeul">
     <li><a href="#">首页</a></li>
-    <li><a href="#">模块设计</a></li>
-    <li><a href="#">图片</a></li>
+    <li><a href="#">编辑菜品信息</a></li>
     </ul>
     </div>
     
@@ -113,15 +112,13 @@ $(document).ready(function(){
     
     <div class="xline"></div>
    
-    <div class="pagin">
-    	<div class="message">共<i class="blue">${pageItem.totalRecord}</i>条记录，当前显示第&nbsp;<i class="blue">1&nbsp;</i>页</div>
+   <div class="pagin">
+    	<div class="message">共<i class="blue">${pageItem.totalRecord}</i>条记录，当前显示第&nbsp;<i class="blue">${pageItem.pageCurrent }&nbsp;</i>页</div>
         <ul class="paginList">
         <li class="paginItem"><a href="javascript:;"><span class="pagepre"></span></a></li>
-        <li class="paginItem current"><a href="javascript:;">1</a></li>
-        <li class="paginItem"><a href="javascript:;">2</a></li>
-        <li class="paginItem"><a href="javascript:;">3</a></li>
-        <li class="paginItem more"><a href="javascript:;">...</a></li>
-        <li class="paginItem"><a href="javascript:;">10</a></li>
+        <c:forEach var="i" begin="1" end="${pageItem.totalPage}" step="1">
+        <li class="paginItem"><a href="<%=request.getContextPath() %>/background/manage/getdishes.action?type=2&page=${i}">${i}</a></li>
+        </c:forEach>
         <li class="paginItem"><a href="javascript:;"><span class="pagenxt"></span></a></li>
         </ul>
     </div>
