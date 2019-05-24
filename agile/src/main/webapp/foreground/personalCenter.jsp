@@ -4,6 +4,7 @@
 <%@ page import="java.util.List"%>
 <%@ page import="com.order.entity.*"%>
 <%@ page isELIgnored="false" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -191,7 +192,7 @@
 		<input class="layui-btn" type="submit" name="showAddress" id="showAddress" 
 		style="font-size:20px;background-color:black;color:#ffA500;outline: none" value="收货地址">	
 		<div style=" text-align: center">
-		    <table class="layui-table" data-pagination="true" data-side-pagination="client" data-page-size="4" style=" text-align: center" id="table-address" >
+		    <table class="layui-table" style=" text-align: center" id="table-address" >
 		    <tr>
 		        <th style=" text-align: center"><font color="#ffA500" size="3" >地址编号</font></th>
 		        <th style=" text-align: center"><font color="#ffA500" size="3" >客户编号</font></th>
@@ -222,10 +223,10 @@
 	     </div>
          <!-- 	    历史订单 -->
 	    <input class="layui-btn" type="submit" name="showAddress" id="showAddress" 
-		style="font-size:20px;background-color:black;color:#ffA500;outline: none" value="历史订单">	
+			   style="font-size:20px;background-color:black;color:#ffA500;outline: none" value="历史订单">	
 		 <div class="layui-form-item layui-form-text" style="margon-left:350px">
 	        <div style=" text-align: center">
-		    <table class="layui-table" data-pagination="true" data-side-pagination="client" data-page-size="4" style=" text-align: center" id="table-order">
+		    <table class="layui-table"  style=" text-align: center" id="table-order">
 		    <tr>
 		        <th style=" text-align: center"><font color="#ffA500" size="3" >订单编号</font></th>
 		        <th style=" text-align: center"><font color="#ffA500" size="3" >总价格</font></th>
@@ -251,7 +252,8 @@
 					        	已送达
 					            </c:if>
 					        </font></td>
-					        <td style=" text-align: center"><font color="#ffA500" size="3" >${order.getCreateTime()}</font></td>
+					        <td style=" text-align: center"><font color="#ffA500" size="3" > 
+					            <fmt:formatDate type="both" dateStyle="long" timeStyle="long" value="${order.getCreateTime()}"/></font></td>
 					        
 					        <td style=" text-align: center"><font color="#ffA500" size="3" >${order.getCustomerAddress().getAddressId()}</font></td> 
 					        <td style=" text-align: center"><font color="#ffA500" size="3" >${order.getCustomerId()}</font></td> 
