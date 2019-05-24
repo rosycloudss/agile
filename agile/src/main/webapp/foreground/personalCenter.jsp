@@ -26,7 +26,7 @@
 	<style> 
 		body{ text-align:center} 
 		.div1{ margin-left:600px; width:400px; height:100px; border:1px } 
-		.div2{ margin-left:500px; width:800px; height:100px; border:1px }
+		.div2{ margin-left:450px; width:850px; height:100px; border:1px }
 		.div3{ margin-left:150px; width:200px; height:100px; border:1px}
 	</style> 
 	<script type="text/javascript">
@@ -240,7 +240,17 @@
 					    <tr>
 					        <td style=" text-align: center"><font color="#ffA500" size="3" >${order.getOrderId()}</font></td>
 					        <td style=" text-align: center"><font color="#ffA500" size="3" >${order.getAmountOfMoney()}</font></td>
-					        <td style=" text-align: center"><font color="#ffA500" size="3" >${order.getStatus()}</font></td>
+					        <td style=" text-align: center"><font color="#ffA500" size="3" >
+					        	<c:if test="${order.getStatus() == 0}">
+					        	未接单
+					            </c:if>
+					            <c:if test="${order.getStatus() == 1}">
+					        	已接单
+					            </c:if>
+					            <c:if test="${order.getStatus() == 2}">
+					        	已送达
+					            </c:if>
+					        </font></td>
 					        <td style=" text-align: center"><font color="#ffA500" size="3" >${order.getCreateTime()}</font></td>
 					        
 					        <td style=" text-align: center"><font color="#ffA500" size="3" >${order.getCustomerAddress().getAddressId()}</font></td> 
