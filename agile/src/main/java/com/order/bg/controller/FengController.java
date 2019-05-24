@@ -25,13 +25,11 @@ import com.order.util.SmsUtil;
 public class FengController {
 
 	private final EmployeeService employeeService;
-	private final DishService dishService;
 	private final DishCategoryService dishCategoryService;
 
 	@Autowired
 	public FengController(EmployeeService employeeService,DishService dishService,DishCategoryService dishCategoryService) {
 		this.employeeService = employeeService;
-		this.dishService=dishService;
 		this.dishCategoryService = dishCategoryService;
 	}
 	
@@ -131,9 +129,6 @@ public class FengController {
 	@RequestMapping(value = "/queryEmployeeInfo.action", method = RequestMethod.GET)
     public String queryEmployeeInfo(Model model,String account) {
 		Employee queryemployee = employeeService.selectByAccount("1759840027");	
-		String pwd;
-		String phone;
-		String name;
 		if(!queryemployee.getAccount() .equals("null"))
 			model.addAttribute("queryemployeeaccount",queryemployee.getAccount());
 		if(!queryemployee.getEmployeeId() .equals("null"))
