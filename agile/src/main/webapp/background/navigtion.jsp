@@ -65,15 +65,16 @@ $(function(){
     </dd>  
     
     
-    <dd><div class="title"><span><img src="images/leftico04.png" /></span>销售订单管理</div>
+    <dd><div class="title"><span><img src="images/leftico01.png" /></span>销售订单管理</div>
     <ul class="menuson">
-        <li><cite></cite><a href="<%=request.getContextPath() %>/background/manage/queryorder.action?type=all" target="rightFrame">销售订单列表</a><i></i></li>
+        <li><cite></cite><a href="<%=request.getContextPath() %>/background/manage/queryorder.action?type=noAccept" target="rightFrame">待接单列表</a><i></i></li>
+        <li><cite></cite><a href="<%=request.getContextPath() %>/background/manage/queryorder.action?type=history" target="rightFrame">历史订单列表</a><i></i></li>
         <li><cite></cite><a href="<%=request.getContextPath() %>/background/manage/queryorder.action?type=time" target="rightFrame">本日销售统计</a><i></i></li>
     </ul>
 	
-	<dd><div class="title"><span><img src="images/leftico04.png" /></span>系统用户管理</div>
+	<dd><div class="title"><span><img src="images/leftico01.png" /></span>系统用户管理</div>
     <ul class="menuson">
-        <li><cite></cite><a href="#">修改密码</a><i></i></li>
+        <li><cite></cite><a href="<%=request.getContextPath() %>/background/feng/updatepwd.action" target="rightFrame">修改密码</a><i></i></li>
     </ul>
     
     </dd>  

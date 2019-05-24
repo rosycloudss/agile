@@ -11,11 +11,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.aliyuncs.dysmsapi.model.v20170525.SendSmsResponse;
+import com.aliyuncs.exceptions.ClientException;
 import com.order.entity.DishCategory;
 import com.order.entity.Employee;
 import com.order.service.DishCategoryService;
 import com.order.service.DishService;
 import com.order.service.EmployeeService;
+import com.order.util.SmsUtil;
 
 @Controller
 @RequestMapping(value="/background/feng")
@@ -140,5 +143,63 @@ public class FengController {
 		model.addAttribute("queryemployee",queryemployee);
 		return  "/background/updateEmployeeInfo";
 	 }	
+	
+	//后台请求
+	@RequestMapping(value = "/updatepwd.action", method = RequestMethod.GET)
+	public String updatePassword() {
+		
+		return  "/background/updateEmployeepasswd";
+	}
+	
+	//修改后台密码
+	@RequestMapping(value = "/updatepwd.action", method = RequestMethod.POST)
+	public String updatePassword(Model model,String pwd,HttpSession session) {
+		
+		Employee employee = (Employee) session.getAttribute("employee");
+		
+		System.out.println(pwd);
+		employee.setPwd(pwd);
+		int status = employeeService.updateByPrimaryKeySelective(employee);
+		if(status != 0)
+			model.addAttribute("msg","修改成功");
+		else 
+			model.addAttribute("msg","修改失败");
+		
+		return  "/background/updateEmployeepasswd";
+	}
+	
+	//用于发送验证码验证信息,暂时用的李凯建的手机号
+	@RequestMapping(value = "/sendVcode.action", method = RequestMethod.GET)
+	public String sendVcode(Model model,String account,HttpSession session) throws ClientException {
+		SmsUtil util = new SmsUtil();
+		util.setNewcode();
+		String code = util.getNewcode();
+//		Employee em=(Employee)session.getAttribute("employee");
+		SendSmsResponse sendSms = SmsUtil.sendSms("17803900062",code);
+		String status = sendSms.getCode();
+		System.out.println(code+"+++"+status+"qqqq");
+		if(status.equals("OK")) {
+		session.setAttribute("code", code);
+		model.addAttribute("msg","验证码发送成功，有效时间一分钟");
+		}
+		else
+		model.addAttribute("msg","验证码发送成失败，请重新尝试");
+		return "/background/updateEmployeepasswd";
+	}
+	
+	@RequestMapping(value = "/defineCode.action", method = RequestMethod.POST)
+    public String defineCode(Model model,HttpSession session,String vcode,String newPasswd,String account) {
+    	String CODE = (String) session.getAttribute("code");
+		System.out.println( vcode+"c"+CODE);
+    	Employee employee =(Employee) session.getAttribute("employee");
+    	if(CODE.equals(vcode)) {
+    		employee.setPwd(newPasswd);
+    		int status = employeeService.updateByPrimaryKeySelective(employee);
+			if(status != 0)
+				model.addAttribute("msg","修改成功");
+			else 
+				model.addAttribute("msg","修改失败");
+    	}
+    	return "/background/updateEmployeepasswd"; }
 		
 }
