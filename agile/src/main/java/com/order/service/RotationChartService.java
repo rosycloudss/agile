@@ -1,5 +1,7 @@
 package com.order.service;
 
+import java.util.List;
+
 import com.order.entity.RotationChart;
 public interface RotationChartService{
 
@@ -11,6 +13,8 @@ public interface RotationChartService{
     int insertSelective(RotationChart record);
 
     RotationChart selectByPrimaryKey(Integer rotionId);
+    
+    List<RotationChart> selectAll();
 
     int updateByPrimaryKeySelective(RotationChart record);
 

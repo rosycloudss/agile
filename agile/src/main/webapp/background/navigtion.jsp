@@ -41,7 +41,7 @@ $(function(){
     </div>
     	<ul class="menuson">
         <li ><cite></cite><a href="<%=request.getContextPath() %>/background/manage/getdishes.action?type=1&page=1" target="rightFrame">菜单信息列表</a><i></i></li>
-        <li><cite></cite><a href="<%=request.getContextPath() %>/background/adddish.jsp" target="rightFrame">增加新菜单</a><i></i></li>
+        <li><cite></cite><a href="<%=request.getContextPath() %>/background/manage/adddish.action" target="rightFrame">增加新菜单</a><i></i></li>
         <li><cite></cite><a href="<%=request.getContextPath() %>/background/manage/getdishes.action?type=2&page=1" target="rightFrame">编辑菜品信息</a><i></i></li>
         </ul>    
     </dd>
@@ -52,25 +52,23 @@ $(function(){
     <span><img src="images/leftico02.png" /></span>菜单类别管理
     </div>
     <ul class="menuson">
-        <li><cite></cite><a href="#">编辑菜品类别</a><i></i></li>
          <li><cite></cite><a href="<%=request.getContextPath() %>/background/dishcategory_add.jsp" target="rightFrame">发布菜品类别</a><i></i></li>
-        <li><cite></cite><a href="<%=request.getContextPath() %>/background/feng/dishcategory_list.action" target="rightFrame">菜品类别查询</a><i></i></li>
+        <li><cite></cite><a href="<%=request.getContextPath() %>/background/feng/dishcategory_list.action" target="rightFrame">类别查询与管理</a><i></i></li>
     </ul>     
     </dd> 
     
     <dd><div class="title"><span><img src="images/leftico03.png" /></span>公告信息管理（待定）</div>
     <ul class="menuson">
-        <li><cite></cite><a href="#">添加新公告</a><i></i></li>
-        <li><cite></cite><a href="#">公告历史查询</a><i></i></li>
+        <li><cite></cite><a href="#">轮播图管理</a><i></i></li>
+        <li><cite></cite><a href="#">网站相关信息管理</a><i></i></li>
     </ul>    
     </dd>  
     
     
     <dd><div class="title"><span><img src="images/leftico04.png" /></span>销售订单管理</div>
     <ul class="menuson">
-        <li><cite></cite><a href="#">销售订单列表</a><i></i></li>
-        <li><cite></cite><a href="#">销售订单查询</a><i></i></li>
-        <li><cite></cite><a href="#">本日销售统计</a><i></i></li>
+        <li><cite></cite><a href="<%=request.getContextPath() %>/background/manage/queryorder.action?type=all" target="rightFrame">销售订单列表</a><i></i></li>
+        <li><cite></cite><a href="<%=request.getContextPath() %>/background/manage/queryorder.action?type=time" target="rightFrame">本日销售统计</a><i></i></li>
     </ul>
 	
 	<dd><div class="title"><span><img src="images/leftico04.png" /></span>系统用户管理</div>

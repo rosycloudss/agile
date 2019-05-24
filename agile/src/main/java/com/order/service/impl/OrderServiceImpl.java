@@ -47,5 +47,9 @@ public class OrderServiceImpl implements OrderService{
     public List<Order> selectByCustomerId(Integer customerId){
     	return orderMapper.selectByCustomerId(customerId);
     }
+    
+    public List<Order> selectAll(){
+    	return orderMapper.selectAll();
+    }
 
 }
