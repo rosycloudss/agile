@@ -61,7 +61,8 @@
                  
                  <div class="layui-form-item">
                      <label class="layui-form-label"></label>
-                     <button id="modify" type="button" class="layui-btn" lay-filter="modify" lay-submit="">确认修改</button>
+                     <button id="modify" type="button" class="layui-btn" lay-filter="modify" lay-submit="" 
+                             style="font-size:20px;background-color:black;color:#ffA500;outline: none">确认修改</button>
                  </div>
           </form>
         </div>

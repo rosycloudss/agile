@@ -13,12 +13,16 @@
 	href="<%=request.getContextPath()%>/layui/css/layui.css" />
 <link rel="stylesheet"
 	href="<%=request.getContextPath()%>/foreground/css/style.css">
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/foreground/css/bootstrap.css">
 <script type="application/javascript"
 	src="<%=request.getContextPath()%>/layui/layui.js"></script>
 <script type="application/javascript"
 	src="<%=request.getContextPath()%>/layui/layui.all.js"></script>
 <script type="text/javascript" 
     src="<%=request.getContextPath()%>/layui/jquery-3.4.1.js"></script>
+<script type="text/javascript" 
+    src="<%=request.getContextPath()%>/foreground/js/bootstrap-table.js"></script>
 	<style> 
 		body{ text-align:center} 
 		.div1{ margin-left:600px; width:400px; height:100px; border:1px } 
@@ -187,7 +191,7 @@
 		<input class="layui-btn" type="submit" name="showAddress" id="showAddress" 
 		style="font-size:20px;background-color:black;color:#ffA500;outline: none" value="收货地址">	
 		<div style=" text-align: center">
-		    <table class="layui-table" style=" text-align: center" id="table">
+		    <table class="layui-table" data-pagination="true" data-side-pagination="client" data-page-size="4" style=" text-align: center" id="table-address" >
 		    <tr>
 		        <th style=" text-align: center"><font color="#ffA500" size="3" >地址编号</font></th>
 		        <th style=" text-align: center"><font color="#ffA500" size="3" >客户编号</font></th>
@@ -221,7 +225,7 @@
 		style="font-size:20px;background-color:black;color:#ffA500;outline: none" value="历史订单">	
 		 <div class="layui-form-item layui-form-text" style="margon-left:350px">
 	        <div style=" text-align: center">
-		    <table class="layui-table" style=" text-align: center" id="table">
+		    <table class="layui-table" data-pagination="true" data-side-pagination="client" data-page-size="4" style=" text-align: center" id="table-order">
 		    <tr>
 		        <th style=" text-align: center"><font color="#ffA500" size="3" >订单编号</font></th>
 		        <th style=" text-align: center"><font color="#ffA500" size="3" >总价格</font></th>

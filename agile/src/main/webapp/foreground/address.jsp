@@ -72,7 +72,8 @@
                  </div>
                  <div class="layui-form-item">
                      <label class="layui-form-label"></label>
-                     <button id="add" type="button" class="layui-btn" lay-filter="add" lay-submit="">增加</button>
+                     <button id="add" type="button" class="layui-btn" lay-filter="add" lay-submit=""
+                             style="font-size:20px;background-color:black;color:#ffA500;outline: none">增加</button>
                  </div>
           </form>
         </div>

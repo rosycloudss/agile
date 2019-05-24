@@ -81,6 +81,7 @@
 		<!-- 后台拦截器 -->
 		<mvc:interceptor>
 			<mvc:mapping path="/background/manage/*.action"/>
+			<mvc:mapping path="/background/feng/*.action"/>
 			<mvc:exclude-mapping path="/background/manage/employeelogin.action"/><!-- 不需要拦截的 -->
 			<bean class="com.order.intercepter.BackgroundIntercepter"></bean>
 		</mvc:interceptor>

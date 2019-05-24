@@ -27,6 +27,12 @@
 		where order_id = #{orderId,jdbcType=VARCHAR}
 	</select>
 	
+	<select id="selectAll" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from tb_order
+	</select>
+	
 	<select id="selectByCustomerId" parameterType="java.lang.Integer"
 		resultMap="BaseResultMap">
 		<!--@mbg.generated -->
