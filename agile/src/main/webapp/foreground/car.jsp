@@ -18,14 +18,16 @@
 <body>
 <table class="layui-table">
     <colgroup>
-        <col width="150">
-        <col width="200">
-        <col width="150">
+    	<col width="150">
         <col width="100">
+        <col width="100">
+        <col width="150">
+        <col width="150">
         <col width="100">
     </colgroup>
     <thead>
         <tr>
+        	<th>菜品图片</th>
             <th>菜品编号</th>
             <th>菜品名称</th>
             <th>单价（元）</th>
@@ -37,6 +39,7 @@
    	<c:if test="${carList != null }">
    		<c:forEach items="${carList }" var="car">
 		   	<tr>
+		   		<td> <img alt="${car.getDish().getName() }" src="<%=request.getContextPath()%>/${car.getDish().getImg().getImgUrl() }"> </td>
 		        <td>${car.getDish().getDishId() }</td>
 		        <td>${car.getDish().getName() }</td>
 		        <td name="price">${car.getDish().getPrice() }</td>
@@ -125,6 +128,7 @@ function checkOut(){
          });
 
      });
+	 
 }
 
 

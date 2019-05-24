@@ -199,7 +199,7 @@
 		                type: 2,
 		                title: '餐车',
 		                content: ["<%=request.getContextPath()%>/foreground/car/getCarList/${customer.getCustomerId() }"],
-		                area: ['1000px', '700px']
+		                area: ['1000px', '600px']
 		            });
 	
 		        });
