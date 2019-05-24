@@ -33,6 +33,14 @@
 		from tb_order
 	</select>
 	
+	<select id="selectByStatus" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from tb_order
+		where status=#{status,jdbcType=INTEGER}
+		order by create_time desc
+	</select>
+	
 	<select id="selectByCustomerId" parameterType="java.lang.Integer"
 		resultMap="BaseResultMap">
 		<!--@mbg.generated -->

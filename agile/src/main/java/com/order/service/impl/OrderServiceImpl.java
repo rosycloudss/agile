@@ -34,7 +34,6 @@ public class OrderServiceImpl implements OrderService{
         return orderMapper.selectByPrimaryKey(orderId);
     }
 
-    
     public int updateByPrimaryKeySelective(Order record) {
         return orderMapper.updateByPrimaryKeySelective(record);
     }
@@ -50,6 +49,10 @@ public class OrderServiceImpl implements OrderService{
     
     public List<Order> selectAll(){
     	return orderMapper.selectAll();
+    }
+    
+    public List<Order> selectByStatus(Integer status){
+    	return orderMapper.selectByStatus(status);
     }
 
 }

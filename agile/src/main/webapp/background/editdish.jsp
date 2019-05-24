@@ -159,7 +159,7 @@ $(document).ready(function(){
 	        <input name="" type="button"  class="sure" id="sure" value="确定" />&nbsp;
 	        <input name="" type="button"  class="cancel" value="取消" />
 	        </div>
-	    </div>
+	 </div>
     </div>
 </body>
 </html>

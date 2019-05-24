@@ -47,7 +47,6 @@ $(document).ready(function(){
 	    }});
 	  $("#detailform").fadeIn(200);
   });
-  
 
   $(".editformtop a").click(function(){
 	  $("#detailform").fadeOut(200);
@@ -55,6 +54,32 @@ $(document).ready(function(){
   
   $("#submit").click(function(){
 	  $("#detailform").fadeOut(100);
+  });
+  
+  var orderid;
+  
+  $(".updateorder").click(function(){
+		 orderid=$(this).attr("id")
+		  $("#updatetip").fadeIn(200);
+	  });
+  
+  $("#updatetop a").click(function(){
+	  $("#deletetip").fadeOut(200);
+  });
+  
+  $("#sure").click(function(){
+	  $.ajax({url:"/agile/background/manage/updateorder.action?id="+orderid,async:true,success:function(result){
+	    	var obj = JSON.parse(result);
+	    	if(obj.status=="true") 	alert("接单成功！");
+	    	else   alert("接单失败！");
+	  	  	$("#editform").fadeOut(200);
+	  	  	window.location.reload();  /* 刷新当前页面 */
+	    }});
+	  $("#updatetip").fadeOut(100);
+  });
+
+  $(".cancel").click(function(){
+	  $("#tip").fadeOut(100);
   });
 
 });
@@ -101,7 +126,15 @@ $(document).ready(function(){
     	<tr>
 	    <td style="padding:15px"><a href="javaScript:" class="detail" id="${order.orderId }">${order.orderId }</a></td>
 	    <td>${order.amountOfMoney}元</td>
-	    <td>${order.status}</td>
+	    
+	    <c:if test="${order.status == 0}">		        
+	    	<td><a href="javaScript:" class="updateorder" id="${order.orderId }">未接单</a></td>	
+		</c:if>
+		
+		<c:if test="${order.status == 1}">		        
+	    	<td>已接单</td>	
+		</c:if>
+		
 	    <td><fmt:formatDate value="${order.createTime}" timeZone="GMT+8" type="date" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 	    <td>${order.customerAddress.address}</td>
 	    <td>${order.customerAddress.recevierName}</td>
@@ -143,6 +176,21 @@ $(document).ready(function(){
 			</div>
 		 </div>
     </div> 
+    <div class="tip" id="updatetip">
+	    <div class="tiptop" id="updatetop"><span>提示信息</span><a></a></div>
+	      <div class="tipinfo">
+	        <span><img src="<%=request.getContextPath() %>/background/images/ticon.png" /></span>
+	        <div class="tipright">
+	        <p>是否接单 ？</p>
+	        <cite>如果是请点击确定按钮 ，否则请点取消。</cite>
+	        </div>
+	       </div>
+	       <div class="tipbtn">
+	        <input name="" type="button"  class="sure" id="sure" value="确定" />&nbsp;
+	        <input name="" type="button"  class="cancel" value="取消" />
+	       </div>
+	 </div>
+
 
     
 <script type="text/javascript">

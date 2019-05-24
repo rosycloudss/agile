@@ -95,6 +95,8 @@ public class Page {
 	 * @return the totalPage
 	 */
 	public int getTotalPage() {
+		
+		if(totalRecord==0) return 1;
 		totalPage = totalRecord % pageSize == 0 ? (totalRecord/pageSize) : (totalRecord / pageSize + 1);
 		return totalPage;
 	}

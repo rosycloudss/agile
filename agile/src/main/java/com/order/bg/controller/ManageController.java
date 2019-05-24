@@ -209,6 +209,27 @@ public class ManageController {
         System.out.println(dish);
 	}
 	
+	//更新订单状态信息,Ajax异步提交数据
+	@RequestMapping(value = "/updateorder.action",method = RequestMethod.GET)
+	public void orderUpdate(String id,HttpServletResponse response) {
+
+        System.out.println(id);
+        
+        Order order = orderService.selectByPrimaryKey(id);
+        order.setStatus(1);
+        
+        try {
+			  int status=orderService.updateByPrimaryKeySelective(order);
+			  response.setContentType("text/html;charset=UTF-8"); 
+			  if(status==1)   response.getWriter().println("{\"status\":\"true\"}"); 
+			  else   response.getWriter().println("{\"status\":\"false\"}");
+			  
+		} catch (IOException e) {
+			e.printStackTrace();
+		}  
+        System.out.println(order);
+	}
+	
 //----update end------------------------------------------------------------------------------------------------------
 	
 //----query start------------------------------------------------------------------------------------------------------
@@ -266,31 +287,43 @@ public class ManageController {
 	public String getAllOrders(Model model,String type,HttpServletResponse response) {
 		
 
-		List<Order> list=orderService.selectAll();
-		Page pageItem=new Page(list.size(),1,10);
+		List<Order> list=null;
+		Page pageItem=null;
+		
 		switch(type) {
 		
-		case "all":
+		case "noAccept":
 			
-			model.addAttribute("list", list);
-			model.addAttribute("pageItem", pageItem);
+			list=orderService.selectByStatus(0);
+			pageItem=new Page(list.size(),1,10);
+			break;
+			
+		case "history":
+			
+			list=orderService.selectByStatus(1);
+			pageItem=new Page(list.size(),1,10);
 			break;
 			
 		case "time":
+
+			List<Order> list2=orderService.selectAll();
+			pageItem=new Page(list2.size(),1,10);
 			
-			List<Order> list2=new ArrayList<Order>();
+			list=new ArrayList<Order>();
 			SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+			
 			String time=sdf.format(new Date()); 
 			System.out.println(time);
-			for(Order order: list) {
-				if(time.equals(sdf.format(order.getCreateTime()))) list2.add(order);
+			for(Order order: list2) {
+				if(time.equals(sdf.format(order.getCreateTime()))) list.add(order);
 			}
 			
-			pageItem.setTotalRecord(list2.size());
-			model.addAttribute("list", list2);
-			model.addAttribute("pageItem", pageItem);
+			pageItem.setTotalRecord(list.size());
 			break;
 		}
+
+		model.addAttribute("list", list);
+		model.addAttribute("pageItem", pageItem);
 		
         return "/background/orderlist";
 	}
