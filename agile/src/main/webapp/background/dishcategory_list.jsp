@@ -13,8 +13,8 @@
 </div>
 <form action="<%=request.getContextPath() %>/background/feng/dishcategory_search.action" method="post">
 <div align="center">
-   <label>类别编号</label><input name="categoryId" type="text"  />
-   <label>类别名称</label><input name="name" type="text"  />         
+   <label>类别编号：</label><input name="categoryId" type="text"  class="dfinput2" />
+   <label>类别名称：</label><input name="name" type="text" class="dfinput2"  />         
        <input type="submit" class="loginbtn" value="查询" />
 </div>
 </form>
@@ -36,7 +36,8 @@
         <td>${dishCategoryList.categoryId}</td>         
         <td>${dishCategoryList.name}</td>
         <td>${dishCategoryList.description}</td>
-        <td><a href="<%=request.getContextPath() %>/background/feng/dishcategory_delete.action?categoryId=${dishCategoryList.categoryId}">删除</a></td>
+        <td><a href="<%=request.getContextPath() %>/background/feng/dishcategory_delete.action?categoryId=${dishCategoryList.categoryId}">删除</a>
+        <a href="<%=request.getContextPath() %>/background/feng/dishcategory_edit.action?categoryId=${dishCategoryList.categoryId}">编辑</a></td>
         </tr> 
         </tbody>
         </c:forEach>

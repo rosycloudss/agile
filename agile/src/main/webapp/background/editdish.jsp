@@ -55,6 +55,8 @@ $(document).ready(function(){
 	    	var obj = JSON.parse(result);
 	    	if(obj) 	alert("删除成功！");
 	    	else   alert("删除失败！");
+	  	  	$("#editform").fadeOut(200);
+	  	  	window.location.reload();  /* 刷新当前页面 */
 	    }});
 	  $("#deletetip").fadeOut(100);
   });

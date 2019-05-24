@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -24,13 +26,13 @@
     
     <div class="welinfo">
     <span><img src="images/sun.png" alt="天气" /></span>
-    <b>Admin早上好，欢迎使用信息管理系统</b>
+    <b>${ sessionScope.employee.name}，你好，欢迎使用信息管理系统</b>
     <a href="#">帐号设置</a>
     </div>
     
     <div class="welinfo">
     <span><img src="images/time.png" alt="时间" /></span>
-    <i>您上次登录的时间：2013-10-09 15:22</i> （不是您登录的？<a href="#">请点这里</a>）
+    <i>账号创建时间：<fmt:formatDate value="${ sessionScope.employee.createTime}" timeZone="GMT+8" type="date" pattern="yyyy-MM-dd HH:mm:ss"/></i> （不是您登录的？<a href="#">请点这里</a>）
     </div>
     
     <div class="xline"></div>

@@ -188,6 +188,7 @@ h2{font-weight:normal;}
 .forminfo li i{color:#7f7f7f; padding-left:20px; font-style:normal;}
 .forminfo li cite{display:block; padding-top:10px;}
 .dfinput{width:345px; height:32px; line-height:32px; border-top:solid 1px #a7b5bc; border-left:solid 1px #a7b5bc; border-right:solid 1px #ced9df; border-bottom:solid 1px #ced9df; background:url(../images/inputbg.gif) repeat-x; text-indent:10px;}
+.dfinput2{width:200px; height:32px; line-height:32px; border-top:solid 1px #a7b5bc; border-left:solid 1px #a7b5bc; border-right:solid 1px #ced9df; border-bottom:solid 1px #ced9df; background:url(../images/inputbg.gif) repeat-x; text-indent:10px;}
 .textinput{border-top:solid 1px #a7b5bc; border-left:solid 1px #a7b5bc; border-right:solid 1px #ced9df; border-bottom:solid 1px #ced9df; background:url(../images/inputbg.gif) repeat-x; padding:10px; width:504px; height:135px; line-height:20px; overflow:hidden;}
 .btn{width:137px;height:35px; background:url(../images/btnbg.png) no-repeat; font-size:14px;font-weight:bold;color:#fff; cursor:pointer;}
 
@@ -276,7 +277,7 @@ h2{font-weight:normal;}
 /*imgtable*/
 .imgtable{width:100%;border:solid 1px #cbcbcb; }
 .imgtable th{background:url(../images/th.gif) repeat-x; height:34px; line-height:34px; border-bottom:solid 1px #b6cad2; text-indent:21px; text-align:center;}
-.imgtable td{line-height:20px; text-indent:21px; border-right: dotted 1px #c7c7c7;}
+.imgtable td{line-height:20px; text-indent:21px; border-right: dotted 1px #c7c7c7; text-align:center;}
 .imgtable td img{margin:10px 20px 10px 0;}
 .imgtable td p{color:#919191;}
 .imgtable td i{font-style:normal; color:#ea2020;}
