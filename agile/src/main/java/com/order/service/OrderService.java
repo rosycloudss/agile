@@ -20,4 +20,5 @@ public interface OrderService{
     
     List<Order> selectByCustomerId(Integer customerId);
 
+    List<Order> selectAll();
 }

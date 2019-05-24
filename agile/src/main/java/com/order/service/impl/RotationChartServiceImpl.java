@@ -1,6 +1,9 @@
 package com.order.service.impl;
 
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+
 import javax.annotation.Resource;
 import com.order.mapper.RotationChartMapper;
 import com.order.entity.RotationChart;
@@ -31,7 +34,10 @@ public class RotationChartServiceImpl implements RotationChartService{
     public RotationChart selectByPrimaryKey(Integer rotionId) {
         return rotationChartMapper.selectByPrimaryKey(rotionId);
     }
-
+    
+    public List<RotationChart> selectAll() {
+        return rotationChartMapper.selectAll();
+    }
     
     public int updateByPrimaryKeySelective(RotationChart record) {
         return rotationChartMapper.updateByPrimaryKeySelective(record);
