@@ -26,7 +26,6 @@
 <table class="layui-table"  >
 	<tr>
 		<td>选择地址</td>
-		
 	</tr>
 	<br>
     <tr>
@@ -42,14 +41,10 @@
    				</c:forEach>
    			</c:if>
 		</select>
-		<!-- <button class="layui-btn layui-btn-normal" id="addAddress"><i class="layui-icon layui-icon-add-1"></i></button> -->
-		<a href="#" id="addAddress" title="添加地址">
-			<i class="layui-icon layui-icon-add-1"></i>
+		<a href="#" id="addAddress" >
+			<i class="layui-icon layui-icon-add-1" title="添加地址"></i>
 		</a>
-		</td> 
-		
-					          
-					        
+		</td> 				        			        
     </tr>
     <br>
     <tr>
@@ -57,8 +52,6 @@
     </tr>
 </table>
 </div>
-
-
 
 <script type="text/javascript">
 
