@@ -63,7 +63,7 @@
     <tr>
         <td colspan="2" style="text-align: center">总价：</td>
         <td id="totalPrice">${totalPrice }</td> 
-        <td colspan="2" style="text-align: center;"><button class="layui-btn layui-btn-normal" onclick="checkOut()">结算</button></td>
+        <td colspan="2" style="text-align: center;"><a href="<%=request.getContextPath()%>/foreground/car/getCheckOut/${customer.getCustomerId()}" target="_parent"><button class="layui-btn layui-btn-normal">结算</button></a></td>
     </tr>
     </tfoot>
 </table>
@@ -110,25 +110,6 @@ function add(customerId,dishId,price){
 		  }
 	  });
     
-}
-
-function updateCar(customerId,dishId,dishNum){
-	
-}
-
-function checkOut(){
-	 layui.use('layer', function(){
-         var layer = layui.layer;
-        
-         layer.open({
-             type: 2,
-             title: '结算',
-             content: ["<%=request.getContextPath()%>/foreground/car/getCheckOut/${customer.getCustomerId() }"],
-             area: ['420px', '280px']
-         });
-
-     });
-	 
 }
 
 
