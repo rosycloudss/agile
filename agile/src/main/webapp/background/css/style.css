@@ -299,9 +299,13 @@ h2{font-weight:normal;}
 .classlist li{float:left;margin-right:10px;margin-bottom:10px;padding:12px;border:1px solid #ebebeb; background:#fcfcfc;}
 .classlist li:hover{border:1px solid #3eafe0; cursor:pointer;}
 .classlist li span{float:left;margin-right:18px;border:3px solid #fff;}
+.classlist li span img{width:400px;height:225px;}
 .classlist li .lright{float:left;width:150px;}
 .classlist li .lright h2{font-size:12px; font-weight:bold;line-height:30px;}
 .classlist li .lright p{line-height:20px;}
+.a-upload {	margin-top:5px;height: 20px; line-height: 20px; position: relative; cursor: pointer; color:#fff; background:#6cc2e8; border: 1px solid #ddd; font-weight:bold; border-radius: 3px; overflow: hidden; display: inline-block; *display: inline; *zoom: 1}
+.a-upload:hover{color:#fff; background:#d98c1d;}
+.a-upload  input { position: absolute; font-size: 100px; right: 0; top: 0; opacity: 0; filter: alpha(opacity=0); cursor: pointer}
 .enter{display:block;margin-top:5px;width:94px;height:30px;color:#fff;background:#3eafe0;font-weight:bold; border-radius:2px; text-align:center;line-height:30px; cursor:pointer;}
 .enter:hover{color:#fff; background:#d98c1d;}
 .clear{clear:both;}

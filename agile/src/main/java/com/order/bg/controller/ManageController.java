@@ -128,7 +128,7 @@ public class ManageController {
 			
 			//保存图片在本地
 			img.transferTo(new File(session.getServletContext().getRealPath("/background/dish_upload_img")+"\\"+newName));
-			imgRecord.setImgUrl("/background/dish_upload_img/"+newName);
+			imgRecord.setImgUrl("background/dish_upload_img/"+newName);
 			imgRecord.setDescription("待定");
 			
 			int status=imgService.insertSelective(imgRecord);
@@ -383,66 +383,67 @@ public class ManageController {
 	public String showRotation(Model model) {
 		
 		List<RotationChart> list = rotationChartService.selectAll();
+		int i=1;
 		
-		model.addAttribute("list", list);
+		for(RotationChart r:list) {
+			
+			model.addAttribute("rotation"+i++,r);
+		}
+		
 		return "/background/rotation_update";
 	
 	}
 		
-//	//更新轮播图，出错时提示信息,还未完成
-//	//注意：保存的图片在tomcat的webapp文件下的已发布的项目下，不在自己的项目文件下
-//	//当上传项目文件到github时需要手动将文件拷贝到项目文件对应的地方，不然不能同步轮播图片到github上，不同步不会影响程序运行
-//	@RequestMapping(value = "/rotation_update.action", method = RequestMethod.POST)
-//	public String updateRotation( MultipartFile img,HttpSession session,Model model) {
-//		
-//		RotationChart rotationChart = new RotationChart();
-//		try {
-//			
-//			//重要：存的图片在tomcat的已发布的webapp目录的项目文件下，不在自己的项目文件中，
-//			//当上传项目文件到github时需要手动将文件拷贝到项目文件对应的地方，不然不能同步轮播图片到github上。
-//			String oldName=img.getOriginalFilename();
-//			String newName=System.currentTimeMillis()+oldName.substring(oldName.lastIndexOf('.'));
-//			System.out.println(session.getServletContext().getRealPath("/background/dish_upload_img")+"\\"+newName);
-//			
-//			//保存图片在本地
-//			img.transferTo(new File(session.getServletContext().getRealPath("/background/dish_upload_img")+"\\"+newName));
-//			imgRecord.setImgUrl("/background/dish_upload_img/"+newName);
-//			imgRecord.setDescription("待定");
-//			
-//			int status=imgService.insertSelective(imgRecord);
-//			
-//			dish.setName(name);
-//			dish.setDescription(description);
-//			dish.setCategoryId(Integer.parseInt(category));
-//			dish.setLeftNum(Integer.parseInt(leftnum));
-//			dish.setPrice(Float.parseFloat(price));
-//			dish.setDishImg(imgRecord.getImgId());
-//			dish.setImg(imgRecord);
-//			
-//			status+=dishService.insert(dish);
-//			
-//			if(status==2) 	
-//				model.addAttribute("msg","添加成功！");
-//			else 
-//				model.addAttribute("msg","添加添加失败！");
-//		}catch(IndexOutOfBoundsException e) {
-//			
-//			model.addAttribute("msg","请添加菜品图片！");
-//			return "/background/adddish";
-//			
-//		}catch(IOException e) {
-//			
-//			model.addAttribute("msg","图片保存失败！");
-//			return "/background/adddish";
-//			
-//		}catch(Exception e) {
-//			
-//			model.addAttribute("msg","请输入正确的菜品信息！");
-//			return "/background/adddish";
-//		}
-//		return "/background/rotation_update";
-//		
-//	}
+	//更新轮播图，出错时提示信息
+	//注意：保存的图片在tomcat的webapp文件下的已发布的项目下，不在自己的项目文件下
+	//当上传项目文件到github前需要手动将文件拷贝到foreground/images下，不然不能同步轮播图片到github上，不同步会影响首页轮播展示
+	@RequestMapping(value = "/rotation_update.action", method = RequestMethod.POST)
+	public String updateRotation( MultipartFile img,String number,HttpSession session,Model model) {
+		
+		RotationChart rotationChart = new RotationChart();
+		try {
+			
+			//重要：存的图片在tomcat的已发布的webapp目录的项目文件下，不在自己的项目文件中，
+			//当上传项目文件到github前需要手动将文件拷贝到foreground/images下，不然不能同步轮播图片到github上，不同步会影响首页轮播展示
+			String oldName=img.getOriginalFilename();
+			System.out.println("oldname:"+oldName);
+			String newName="lunbo"+System.currentTimeMillis()+oldName.substring(oldName.lastIndexOf('.'));
+			System.out.println("图片保存在："+session.getServletContext().getRealPath("/foreground/images")+"\\"+newName);
+			
+			//保存图片在本地
+			img.transferTo(new File(session.getServletContext().getRealPath("/foreground/images")+"\\"+newName));
+			rotationChart.setRotionId(Integer.parseInt(number));
+			rotationChart.setImgLink("foreground/images/"+newName);
+			rotationChart.setCreateTime(new Date(System.currentTimeMillis()));
+			
+			int status=rotationChartService.updateByPrimaryKeySelective(rotationChart);
+			
+			if(status==1) 	
+				model.addAttribute("msg"+number,"添加成功！");
+			else 
+				model.addAttribute("msg"+number,"添加失败！");
+			
+		}catch(IndexOutOfBoundsException e) {
+			
+			model.addAttribute("msg"+number,"请添加轮播图片！");
+			
+		}catch(IOException e) {
+			
+			model.addAttribute("msg"+number,"图片保存失败！");
+			
+		}
+		
+		List<RotationChart> list = rotationChartService.selectAll();
+		int i=1;
+		
+		for(RotationChart r:list) {
+			
+			model.addAttribute("rotation"+i++,r);
+		}
+		
+		return "/background/rotation_update";
+		
+	}
 	
 //----web manage end------------------------------------------------------------------------------------------------------
 	
