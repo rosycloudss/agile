@@ -52,9 +52,9 @@
 	<div class="layui-col-xs12">
 		<div class="layui-carousel" id="ration">
 			<div carousel-item="">
-				<img src="<%=request.getContextPath()%>/foreground/images/ration1.jpg"> 
-				<img src="<%=request.getContextPath()%>/foreground/images/ration2.jpg"> 
-				<img src="<%=request.getContextPath()%>/foreground/images/ration3.jpg">
+				<c:forEach items="${rotationCharts }" var="rotation">
+				<img src="<%=request.getContextPath()%>/${rotation.getImgLink() }"> 
+				</c:forEach>
 			</div>
 		</div>
 	</div>

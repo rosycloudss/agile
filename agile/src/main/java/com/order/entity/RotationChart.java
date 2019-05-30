@@ -57,4 +57,11 @@ public class RotationChart {
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }
+
+	@Override
+	public String toString() {
+		return "RotationChart [rotionId=" + rotionId + ", imgId=" + imgId + ", imgLink=" + imgLink + ", createTime="
+				+ createTime + "]";
+	}
+    
 }
