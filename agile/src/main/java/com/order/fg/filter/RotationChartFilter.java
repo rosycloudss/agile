@@ -58,7 +58,6 @@ public class RotationChartFilter implements Filter {
 			rotationCharts = rotationChartService.selectAll();
 			session.setAttribute("rotationCharts", rotationCharts);
 		}
-		System.out.println(rotationCharts);
 		chain.doFilter(request, response);
 	}
 

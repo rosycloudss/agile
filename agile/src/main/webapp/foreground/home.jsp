@@ -70,7 +70,7 @@
 					<div class="widget">
 						<figure class="widget-header">
 							<a
-								href="https://mb.mituo.cn/mui144/product/product.php?class2=11"
+								href="<%=request.getContextPath()%>/foreground/dish/dishDisplay.action?categoryId=2"
 								title="西式菜系" target="_self">
 								<div class="cover-image"
 									style="background-image: url(https://images.mituo.cn/mui144/upload/mui144/201805/1527652181.jpg);"
@@ -81,7 +81,7 @@
 							data-animate="slide-bottom50" data-repeat="false" color="#212121"
 							tr="0.7" trh="0.75" style="background: rgba(33, 33, 33, 0.7);">
 							<a
-								href="https://mb.mituo.cn/mui144/product/product.php?class2=11"
+								href="<%=request.getContextPath()%>/foreground/dish/dishDisplay.action?categoryId=2"
 								title="西式菜系" target="_self">
 								<h3>西式菜系</h3>
 								<p class="desc">西餐，顾名思义是西方国家的餐食。西方国家，是相对于东亚而言的欧洲白人世界文化圈，西餐的准确称呼应为欧...</p>
@@ -93,7 +93,7 @@
 					<div class="widget">
 						<figure class="widget-header">
 							<a
-								href="https://mb.mituo.cn/mui144/product/product.php?class2=12"
+								href="<%=request.getContextPath()%>/foreground/dish/dishDisplay.action?categoryId=1"
 								title="中式菜系" target="_self">
 								<div class="cover-image layui-anim"
 									data-anim="layui-anim-scaleSpring"
@@ -105,7 +105,7 @@
 							data-animate="slide-right50" data-repeat="false" color="#212121"
 							tr="0.7" trh="0.75" style="background: rgba(33, 33, 33, 0.7);">
 							<a
-								href="https://mb.mituo.cn/mui144/product/product.php?class2=12"
+								href="<%=request.getContextPath()%>/foreground/dish/dishDisplay.action?categoryId=1"
 								title="中式菜系" target="_self">
 								<h3 style="color: #c8c8c8;">中式菜系</h3>
 								<p class="desc">中国八大菜系菜品选料考究、 技法多样、 制作精良的烹饪技艺闻名于世。 基于此，
@@ -118,7 +118,7 @@
 					<div class="widget">
 						<figure class="widget-header">
 							<a
-								href="https://mb.mituo.cn/mui144/product/product.php?class2=13"
+								href="<%=request.getContextPath()%>/foreground/dish/dishDisplay.action?categoryId=3"
 								title="面类点心" target="_self">
 								<div class="cover-image"
 									style="background-image: url(https://images.mituo.cn/mui144/upload/mui144/201805/1527652515.jpg);"
@@ -129,7 +129,7 @@
 							data-animate="slide-right50" data-repeat="false" color="#212121"
 							tr="0.7" trh="0.75" style="background: rgba(33, 33, 33, 0.7);">
 							<a
-								href="https://mb.mituo.cn/mui144/product/product.php?class2=13"
+								href="<%=request.getContextPath()%>/foreground/dish/dishDisplay.action?categoryId=3"
 								title="面类点心" target="_self">
 								<h3>面类点心</h3>
 								<p class="desc">面点是中国烹饪的主要组成部分，素以历史悠久、制作精致、品类丰富、风味多样著称于世。春秋战国时，谷物品...</p>
@@ -141,7 +141,7 @@
 					<div class="widget">
 						<figure class="widget-header">
 							<a
-								href="https://mb.mituo.cn/mui144/product/product.php?class2=14"
+								href="<%=request.getContextPath()%>/foreground/dish/dishDisplay.action?categoryId=4"
 								title="蔬菜类菜肴" target="_self">
 								<div class="cover-image"
 									style="background-image: url(https://images.mituo.cn/mui144/upload/mui144/201805/1527653712.jpg);"
@@ -152,7 +152,7 @@
 							data-animate="slide-right50" data-repeat="false" color="#212121"
 							tr="0.7" trh="0.75" style="background: rgba(33, 33, 33, 0.7);">
 							<a
-								href="https://mb.mituo.cn/mui144/product/product.php?class2=14"
+								href="<%=request.getContextPath()%>/foreground/dish/dishDisplay.action?categoryId=4"
 								title="蔬菜类菜肴" target="_self">
 								<h3>蔬菜类菜肴</h3>
 								<p class="desc">在夏日时光,我倾向于用玫瑰红葡萄酒(rosé)配蔬菜类的菜肴,尤其是普罗旺斯(Provence)产区...</p>
