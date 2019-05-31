@@ -25,7 +25,7 @@ $(document).ready(function(){
 		  var obj = JSON.parse(result);
 		  var s='<tbody align="center">';
 		  for(i=0;i<obj.length;i++){
-			  s+='<tr style="padding:15px"><td>'+obj[i].name+"</td><td>"+obj[i].number+"</td><td>"+obj[i].singlePrice+"</td><td>"+obj[i].singlePrice*obj[i].number+"</td></tr>";
+			  s+='<tr style="padding:15px"><td>'+obj[i].name+"</td><td>"+obj[i].number+"</td><td>"+obj[i].singlePrice+"</td><td>"+obj[i].singlePrice*obj[i].number+"元</td></tr>";
 		  }
 		  s+="</tbody>"
 		  $("#detailtable tbody").remove();

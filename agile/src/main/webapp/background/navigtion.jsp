@@ -60,7 +60,6 @@ $(function(){
     <dd><div class="title"><span><img src="images/leftico03.png" /></span>公告信息管理</div>
     <ul class="menuson">
         <li><cite></cite><a href="<%=request.getContextPath() %>/background/manage/rotation_update.action" target="rightFrame">轮播图管理</a><i></i></li>
-        <li><cite></cite><a href="#">网站相关信息管理</a><i></i></li>
     </ul>    
     </dd>  
     

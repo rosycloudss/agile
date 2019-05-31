@@ -30,6 +30,7 @@ import com.order.service.ImgService;
 import com.order.service.OrderDishService;
 import com.order.service.OrderService;
 import com.order.service.RotationChartService;
+import com.order.service.WebsiteService;
 
 @Controller
 @RequestMapping(value="/background/manage")
@@ -41,6 +42,7 @@ public class ManageController {
 	private final OrderService orderService;
 	private final OrderDishService orderDishService;
 	private final RotationChartService rotationChartService;
+	private final WebsiteService websiteService;
 
 	@Autowired
 	public ManageController(EmployeeService employeeService,
@@ -48,7 +50,8 @@ public class ManageController {
 			ImgService imgService,
 			OrderService orderService,
 			OrderDishService orderDishService,
-			RotationChartService rotationChartService) 
+			RotationChartService rotationChartService,
+			WebsiteService websiteService) 
 	{
 		this.employeeService = employeeService;
 		this.dishService=dishService;
@@ -56,6 +59,7 @@ public class ManageController {
 		this.orderService=orderService;
 		this.orderDishService=orderDishService;
 		this.rotationChartService=rotationChartService;
+		this.websiteService=websiteService;
 	}
 	
 //----login/logout start------------------------------------------------------------------------------------------------------
@@ -444,6 +448,22 @@ public class ManageController {
 		return "/background/rotation_update";
 		
 	}
+	
+//	//请求更新关于我们
+//	@RequestMapping(value = "/about_us.action", method = RequestMethod.GET)
+//	public String showAboutUs(Model model) {
+//		
+//		List<WebsiteService> list = websiteService.selectAll();
+//		int i=1;
+//		
+//		for(WebsiteService r:list) {
+//			
+//			model.addAttribute("rotation"+i++,r);
+//		}
+//		
+//		return "/background/rotation_update";
+//	
+//	}
 	
 //----web manage end------------------------------------------------------------------------------------------------------
 	
