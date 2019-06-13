@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.order.entity.Dish;
+import com.order.entity.DishCategory;
 import com.order.entity.Page;
 import com.order.service.DishCategoryService;
 import com.order.service.DishService;
@@ -51,5 +52,30 @@ public class DishController {
 		model.addAttribute("dishList", dishList);
 		return "/foreground/dishDisplay";
 	}
+	/**
+	 * 菜品详情
+	 * @return
+	 */
+	@RequestMapping("dishDetail.action")
+	public String dishDetial(Integer dishId,Model model) {
+		Dish dish = dishService.selectByPrimaryKey(dishId);
+		
+		List<Dish> dishList = dishService.getAll(null);
+		for(int i = 0;i < dishList.size();i++) {
+			if(dishList.get(i).getDishId() == dish.getDishId()) {
+				dishList.remove(i);
+			}
+		}
+		dishList = dishList.subList(0, 4);
+		DishCategory category = dishCategoryService.selectByPrimaryKey(dish.getCategoryId());
+		
+		model.addAttribute("dish",dish);
+		model.addAttribute("dishList",dishList);
+		model.addAttribute("category",category);
+		System.out.println(dishList);
+		return "/foreground/dishDetail";
+	}
+	
+	
 
 }

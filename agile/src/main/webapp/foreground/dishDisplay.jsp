@@ -85,7 +85,7 @@
 							<img class="overlay-figure"
 								src="<%=request.getContextPath()%>/${dish.getImg().getImgUrl() }"
 								alt="${dish.getName() }">
-							<a href="#" target=_self
+							<a href="<%=request.getContextPath()%>/foreground/dish/dishDetail.action?dishId=${dish.getDishId() }" target=_self
 								class="overlay-panel overlay-background overlay-fade overlay-icon">
 								<i class="fa fa-search"></i>
 							</a>
